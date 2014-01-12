@@ -10,17 +10,15 @@ using System.Collections;
 public class TouchLogic : MonoBehaviour 
 {
 	public static int currTouch = 0;//so other scripts can know what touch is currently on screen
-	private Ray ray;//this will be the ray that we cast from our touch into the scene
-	private RaycastHit rayHitInfo = new RaycastHit();//return the info of the object that was hit by the ray
 	[HideInInspector]
 	public int touch2Watch = 64;
 	
-	void Update () 
+	public void CheckTouches()
 	{
 		//is there a touch on screen?
 		if(Input.touches.Length <= 0)
 		{
-			//if no touches then execute this code
+			OnNoTouches();
 		}
 		else //if there is a touch
 		{
@@ -28,64 +26,51 @@ public class TouchLogic : MonoBehaviour
 			for(int i = 0; i < Input.touchCount; i++)
 			{
 				currTouch = i;
-				Debug.Log(currTouch);
 				//executes this code for current touch (i) on screen
 				if(this.guiTexture != null && (this.guiTexture.HitTest(Input.GetTouch(i).position)))
 				{
 					//if current touch hits our guitexture, run this code
 					if(Input.GetTouch(i).phase == TouchPhase.Began)
 					{
-						//need to send message b/c function is not present in this script
-						//OnTouchBegan();
-						this.SendMessage("OnTouchBegan");
+						OnTouchBegan();
 					}
 					if(Input.GetTouch(i).phase == TouchPhase.Ended)
 					{
-						//OnTouchEnded();
-						this.SendMessage("OnTouchEnded");
+						OnTouchEnded();
 					}
 					if(Input.GetTouch(i).phase == TouchPhase.Moved)
 					{
-						//OnTouchMoved();
-						this.SendMessage("OnTouchMoved");
-					}
-					if(Input.GetTouch(i).phase == TouchPhase.Stationary)
-					{
-						//OnTouchStayed();
-						this.SendMessage("OnTouchStayed");
+						OnTouchMoved();
 					}
 				}
 				
 				//outside so it doesn't require the touch to be over the guitexture
-				ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);//creates ray from screen point position
 				switch(Input.GetTouch(i).phase)
 				{
 				case TouchPhase.Began:
-					//OnTouchBeganAnywhere();
-					this.SendMessage("OnTouchBeganAnyWhere");
-					if(Physics.Raycast(ray, out rayHitInfo))
-						rayHitInfo.transform.gameObject.SendMessage("OnTouchBegan3D");
+					OnTouchBeganAnywhere();
 					break;
 				case TouchPhase.Ended:
-					//OnTouchEndedAnywhere();
-					this.SendMessage("OnTouchEndedAnywhere");
-					if(Physics.Raycast(ray, out rayHitInfo))
-						rayHitInfo.transform.gameObject.SendMessage("OnTouchEnded3D");
+					OnTouchEndedAnywhere();
 					break;
 				case TouchPhase.Moved:
-					//OnTouchMovedAnywhere();
-					this.SendMessage("OnTouchMovedAnywhere");
-					if(Physics.Raycast(ray, out rayHitInfo))
-						rayHitInfo.transform.gameObject.SendMessage("OnTouchMoved3D");
+					OnTouchMovedAnywhere();
 					break;
 				case TouchPhase.Stationary:
-					//OnTouchStayedAnywhere();
-					this.SendMessage("OnTouchStayedAnywhere");
-					if(Physics.Raycast(ray, out rayHitInfo))
-						rayHitInfo.transform.gameObject.SendMessage("OnTouchStayed3D");
+					OnTouchStayedAnywhere();
 					break;
 				}
 			}
 		}
 	}
+	
+	//the default functions, define what will happen if the child doesn't override these functions
+	public virtual void OnNoTouches(){}
+	public virtual void OnTouchBegan(){}
+	public virtual void OnTouchEnded(){}
+	public virtual void OnTouchMoved(){}
+	public virtual void OnTouchBeganAnywhere(){}
+	public virtual void OnTouchEndedAnywhere(){}
+	public virtual void OnTouchMovedAnywhere(){}
+	public virtual void OnTouchStayedAnywhere(){}
 }

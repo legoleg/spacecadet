@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class Ship : MonoBehaviour {
-
+	public bool btnLeftDown = false;
+	public bool btnRightDown = false;
 	public float tiltThreshold = .3f;
 	public float freezeTime = 0.2f;
 	float fireRate = 0.5217391f;
@@ -12,7 +13,7 @@ public class Ship : MonoBehaviour {
 	public GameObject[] spawns;
 
 	SpawnController spawnController;
-	int currPos = 2;
+	int currPos = 1;
 
 
 	void Start ()
@@ -32,26 +33,53 @@ public class Ship : MonoBehaviour {
 
 	void Update ()
 	{
+		Debug.Log ("Current position == " + currPos);
+		// get input from touches using the TouchLogic script
+//		if (btnLeftDown && !btnRightDown)
+//		{
+//			currPos = 0;
+//			Move();
+//		}
+//		else if (btnRightDown && !btnLeftDown)
+//		{
+//			currPos = 2;
+//			Move();
+//		}
+//		else
+//		{
+//			currPos = 1;
+//			Move();
+//		}
+
 		// get input from accelerometer in a mobile device
 		if (Input.acceleration.normalized.x < -tiltThreshold)
-		{
 			MoveLeft();
-		}
 		else if (Input.acceleration.normalized.x > tiltThreshold)
-		{
 			MoveRight();
-		}
-
 
 		// get input from keyboard
+//		if (Input.GetKeyDown("left") && !Input.GetKeyDown("right"))
+//		{
+//			currPos = 0;
+//			Move();
+//		}
+//		else if (Input.GetKeyDown("right") && !Input.GetKeyDown("left"))
+//		{
+//			currPos = 2;
+//			Move();
+//		}
+//		else
+//		{
+//			currPos = 1;
+//			Move();
+//		}
+
+
 		if (Input.GetKeyDown("left"))
-		{
 			MoveLeft();
-		}
 		else if (Input.GetKeyDown("right"))
-		{
 			MoveRight();
-		}
+		Move();
 	}
 	
 	public void MoveLeft ()
