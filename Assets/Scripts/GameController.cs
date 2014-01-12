@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour
 
 	public static int points = 0;
 	// display
-//	public GameObject blueTxt;
+	public GameObject pointsTxt;
 //	public GameObject redTxt;
 	
 	public AudioClip inGameMusic;
@@ -40,8 +40,7 @@ public class GameController : MonoBehaviour
 
 	void Update ()
 	{
-//		redTxt.guiText.text = redPoints.ToString();
-//		blueTxt.guiText.text = bluePoints.ToString();
+		pointsTxt.guiText.text = points.ToString();
 	}
 
 	IEnumerator CountDown ()
