@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SpawnController : MonoBehaviour {
 
-	public float spawnRate = 2f;
+	float spawnRate = 0.5217391f;
 	public GameObject[] objectsToSpawn;
 	public Material hotMaterial;
 	public Material[] backMaterials;
