@@ -9,7 +9,6 @@ public class Ship : MonoBehaviour {
 	public float freezeTime = 0.2f;
 	public GameObject bullet;
 	public Transform bulletSpawnTransform;
-	public float firingRate = 0.5f;
 	public GameObject[] spawns;
 
 	SpawnController spawnController;
@@ -19,15 +18,12 @@ public class Ship : MonoBehaviour {
 	{
 		spawnController = GameObject.Find ("SpawnController").GetComponent<SpawnController> ();
 		spawns = spawnController.spawns;
-		//StartCoroutine (Shoot());
 	}
 
 	void Shoot ()
 	{
-		//yield return new WaitForSeconds (firingRate);
 		GameObject bulletInstance = (GameObject)Instantiate (bullet, bulletSpawnTransform.position, Quaternion.identity);
 		bulletInstance.rigidbody.AddForce(Vector2.up * 200, ForceMode.Force);
-		//StartCoroutine (Shoot());
 	}
 
 	IEnumerator FreezeMovement ()
@@ -88,5 +84,6 @@ public class Ship : MonoBehaviour {
 			"easetype", iTween.EaseType.spring, 
 			"time", .4f,
 			"oncomplete", "Shoot"));
+		//TODO continue shooting when not moving
 	}
 }
