@@ -11,31 +11,29 @@ public class GameController : MonoBehaviour
 	public static bool playing = false;
 	public static bool done = false;
 
-	public static int bluePoints = 0;
-	public static int redPoints = 0;
+	public static int points = 0;
 	// display
 //	public GameObject blueTxt;
 //	public GameObject redTxt;
 	
 	public AudioClip inGameMusic;
-	public AudioClip postGameMusic;
+	public AudioClip pauseMusic;
 
 	public float timeLimit = 120f;
 	private float timeLeft;
-	public GameObject countDown;
-	public GameObject loadLvlBtn;
+//	public GameObject countDown;
+//	public GameObject loadLvlBtn;
 
 	Music music;	
 
 	void Start ()
 	{
-		bluePoints = 0;
-		redPoints = 0;
+		points = 0;
 		playing = false;
 		done = false;
 		music = GameObject.Find ("Music").GetComponent<Music>();
 		// fade in post-game music
-		music.gameObject.audio.clip = postGameMusic;
+		music.gameObject.audio.clip = inGameMusic;
 		music.audio.Play();
 //		music.FadeIn(.5f);
 	}
@@ -49,8 +47,8 @@ public class GameController : MonoBehaviour
 	IEnumerator CountDown ()
 	{
 		timeLeft--;
-		countDown.guiText.text = timeLeft.ToString();
-		TweenGameObject(countDown);
+//		countDown.guiText.text = timeLeft.ToString();
+//		TweenGameObject(countDown);
 		yield return new WaitForSeconds (1f);
 		StartCoroutine(CountDown());
 	}
@@ -83,7 +81,7 @@ public class GameController : MonoBehaviour
 		yield return new WaitForSeconds (1f);
 
 		// fade in post-game music
-		music.gameObject.audio.clip = postGameMusic;
+		music.gameObject.audio.clip = pauseMusic;
 		music.FadeIn(.5f);
 
 		yield return new WaitForSeconds (.5f);
@@ -91,7 +89,7 @@ public class GameController : MonoBehaviour
 
 		// show button
 //		loadLvlBtn.GetComponent<LoadLevelButton>().Show(.1f);
-		yield return new WaitForSeconds (postGameMusic.length + .5f);
+		yield return new WaitForSeconds (pauseMusic.length + .5f);
 
 		// load main menu
 		Application.LoadLevel ("mainMenu");

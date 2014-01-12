@@ -3,51 +3,47 @@ using System.Collections;
 
 public class Ship : MonoBehaviour {
 
-	int currPos = 2;
-
 	public float tiltThreshold = .3f;
 	public float freezeTime = 0.2f;
+	float fireRate = 0.5217391f;
 	public GameObject bullet;
+	public int bulletSpeed = 200;
 	public Transform bulletSpawnTransform;
 	public GameObject[] spawns;
 
 	SpawnController spawnController;
-	bool readyToMove = true;
+	int currPos = 2;
+
 
 	void Start ()
 	{
 		spawnController = GameObject.Find ("SpawnController").GetComponent<SpawnController> ();
 		spawns = spawnController.spawns;
+		StartCoroutine(Shoot());
 	}
 
-	void Shoot ()
+	IEnumerator Shoot ()
 	{
 		GameObject bulletInstance = (GameObject)Instantiate (bullet, bulletSpawnTransform.position, Quaternion.identity);
-		bulletInstance.rigidbody.AddForce(Vector2.up * 200, ForceMode.Force);
+		bulletInstance.rigidbody.AddForce(Vector2.up * bulletSpeed, ForceMode.Force);
+		yield return new WaitForSeconds (fireRate);
+		StartCoroutine(Shoot());
 	}
 
-	IEnumerator FreezeMovement ()
-	{
-		readyToMove = false;
-		yield return new WaitForSeconds (freezeTime);
-		readyToMove = true;
-	}
-	
 	void Update ()
 	{
-		if (Input.acceleration.normalized.x < -tiltThreshold && readyToMove)
+		// get input from accelerometer in a mobile device
+		if (Input.acceleration.normalized.x < -tiltThreshold)
 		{
-			StartCoroutine(FreezeMovement ());
 			MoveLeft();
 		}
-		else if (Input.acceleration.normalized.x > tiltThreshold && readyToMove)
+		else if (Input.acceleration.normalized.x > tiltThreshold)
 		{
-			StartCoroutine(FreezeMovement ());
 			MoveRight();
 		}
 
 
-		// get input
+		// get input from keyboard
 		if (Input.GetKeyDown("left"))
 		{
 			MoveLeft();
@@ -82,8 +78,7 @@ public class Ship : MonoBehaviour {
 		iTween.MoveTo (this.gameObject, iTween.Hash (
 			"position", new Vector3 (spawns [currPos].transform.position.x, transform.position.y, transform.position.z), 
 			"easetype", iTween.EaseType.spring, 
-			"time", .4f,
-			"oncomplete", "Shoot"));
-		//TODO continue shooting when not moving
+			"time", .4f
+			));
 	}
 }
