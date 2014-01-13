@@ -4,12 +4,27 @@ using System.Collections;
 public class Bullet : MonoBehaviour {
 
 	public GameObject explosion;
+	public float bulletLifeTime = 2f;
+
+
+	GameController gameController;
+
+	void Start ()
+	{
+		Destroy (gameObject, bulletLifeTime);
+		ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem>();
+		foreach (var particleSystem in particleSystems) {
+			particleSystem.startLifetime = bulletLifeTime;
+		}
+		gameController = GameObject.FindWithTag ("GameController").GetComponent<GameController>();
+	}
 
 	void OnCollisionEnter (Collision collision)
 	{
 		if (collision.gameObject.CompareTag("asteroid"))
 		{
-			GameController.points++;
+			gameController.points++;
+			gameController.TweenGameObject(gameController.pointsTxt);
 		}
 
 		Destroy(collision.gameObject);

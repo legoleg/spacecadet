@@ -6,7 +6,7 @@ public class Ship : MonoBehaviour {
 	public bool btnRightDown = false;
 	public float tiltThreshold = .3f;
 	public float freezeTime = 0.2f;
-	float fireRate = 0.5217391f;
+	public static float fireRate = .4f;//0.5217391f;
 	public GameObject bullet;
 	public int bulletSpeed = 200;
 	public Transform bulletSpawnTransform;
@@ -14,7 +14,6 @@ public class Ship : MonoBehaviour {
 
 	SpawnController spawnController;
 	int currPos = 1;
-
 
 	void Start ()
 	{
@@ -33,53 +32,17 @@ public class Ship : MonoBehaviour {
 
 	void Update ()
 	{
-		Debug.Log ("Current position == " + currPos);
-		// get input from touches using the TouchLogic script
-//		if (btnLeftDown && !btnRightDown)
-//		{
-//			currPos = 0;
-//			Move();
-//		}
-//		else if (btnRightDown && !btnLeftDown)
-//		{
-//			currPos = 2;
-//			Move();
-//		}
-//		else
-//		{
-//			currPos = 1;
-//			Move();
-//		}
-
-		// get input from accelerometer in a mobile device
-		if (Input.acceleration.normalized.x < -tiltThreshold)
-			MoveLeft();
-		else if (Input.acceleration.normalized.x > tiltThreshold)
-			MoveRight();
-
+#if UNITY_EDITOR
 		// get input from keyboard
-//		if (Input.GetKeyDown("left") && !Input.GetKeyDown("right"))
-//		{
-//			currPos = 0;
-//			Move();
-//		}
-//		else if (Input.GetKeyDown("right") && !Input.GetKeyDown("left"))
-//		{
-//			currPos = 2;
-//			Move();
-//		}
-//		else
-//		{
-//			currPos = 1;
-//			Move();
-//		}
-
-
 		if (Input.GetKeyDown("left"))
+		{
 			MoveLeft();
+		}	
 		else if (Input.GetKeyDown("right"))
+		{
 			MoveRight();
-		Move();
+		}
+#endif
 	}
 	
 	public void MoveLeft ()

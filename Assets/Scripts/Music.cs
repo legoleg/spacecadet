@@ -1,28 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
 [RequireComponent(typeof (AudioSource))]
 public class Music : MonoBehaviour {
 
-	public static GameObject go;
 	public float pitch;
 	public float volume;
 
-	void Start ()
-	{
-		go = gameObject;
-		FadeIn (.5f);
-	}
-
 	public void FadeIn (float time)
 	{
-		iTween.AudioTo (go, volume, pitch, time);
-		go.audio.Play ();
+		iTween.AudioTo (gameObject, volume, pitch, time);
 	}
 
 	public void FadeOut (float time)
 	{
-		iTween.AudioTo (go, 0f, 0f, time);
+		iTween.AudioTo (gameObject, 0f, 0f, time);
 	}
+
+#if UNITY_EDITOR
+	void OnGUI ()
+	{
+		if (GUILayout.Button("Fade in"))
+			FadeIn(Ship.fireRate);
+		if (GUILayout.Button("Fade out"))
+			FadeOut(Ship.fireRate);
+	}
+#endif
 }

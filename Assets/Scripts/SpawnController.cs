@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SpawnController : MonoBehaviour {
 
-	float spawnRate = 0.5217391f;
+	float spawnRate = 2.0869564f;
 	public GameObject[] objectsToSpawn;
 	public Material hotMaterial;
 	public Material[] backMaterials;
@@ -14,6 +14,8 @@ public class SpawnController : MonoBehaviour {
 
 	
 	void Start () {
+		spawnRate = Ship.fireRate;
+
 		if (objectsToSpawn.Length < 1 || spawns.Length < 1 || bgObjectsToSpawn.Length < 1 || spawnsBG1.Length < 1)
 		{
 			Debug.LogError("Assign GameObjects...");

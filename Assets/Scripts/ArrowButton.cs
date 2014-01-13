@@ -21,17 +21,8 @@ public class ArrowButton : TouchLogic
 	{
 		Debug.Log("OnTouchBegan message received...");
 		if (direction == Direction.left)
-			ship.btnLeftDown = true;
+			ship.MoveLeft();
 		else if (direction == Direction.right)
-			ship.btnRightDown = true;
-	}
-
-	public override void OnTouchEnded()
-	{
-		Debug.Log("OnTouchEnded message received...");
-		if (direction == Direction.left)
-			ship.btnLeftDown = false;
-		else if (direction == Direction.right)
-			ship.btnRightDown = false;
+			ship.MoveRight();
 	}
 }

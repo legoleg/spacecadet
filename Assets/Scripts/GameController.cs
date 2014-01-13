@@ -11,17 +11,15 @@ public class GameController : MonoBehaviour
 	public static bool playing = false;
 	public static bool done = false;
 
-	public static int points = 0;
+	public int points = 0;
 	// display
 	public GameObject pointsTxt;
-//	public GameObject redTxt;
-	
+
 	public AudioClip inGameMusic;
 	public AudioClip pauseMusic;
 
 	public float timeLimit = 120f;
 	private float timeLeft;
-//	public GameObject countDown;
 //	public GameObject loadLvlBtn;
 
 	Music music;	
@@ -34,8 +32,8 @@ public class GameController : MonoBehaviour
 		music = GameObject.Find ("Music").GetComponent<Music>();
 		// fade in post-game music
 		music.gameObject.audio.clip = inGameMusic;
+		music.FadeIn(Ship.fireRate*4);
 		music.audio.Play();
-//		music.FadeIn(.5f);
 	}
 
 	void Update ()
@@ -43,16 +41,7 @@ public class GameController : MonoBehaviour
 		pointsTxt.guiText.text = points.ToString();
 	}
 
-	IEnumerator CountDown ()
-	{
-		timeLeft--;
-//		countDown.guiText.text = timeLeft.ToString();
-//		TweenGameObject(countDown);
-		yield return new WaitForSeconds (1f);
-		StartCoroutine(CountDown());
-	}
-
-	void TweenGameObject (GameObject obj)
+	public void TweenGameObject (GameObject obj)
 	{
 		iTween.PunchPosition (obj, iTween.Hash ("y", -.05f, "time", .9f));
 	}
@@ -60,12 +49,10 @@ public class GameController : MonoBehaviour
 	public IEnumerator GameTimer ()
 	{
 		// fade in in-game music
-		music.gameObject.audio.clip = inGameMusic;
-		music.FadeIn(.5f);
+//		music.gameObject.audio.clip = inGameMusic;
+//		music.FadeIn(.5f);
 
 		playing = true;
-		timeLeft = timeLimit;
-		StartCoroutine(CountDown());
 		yield return new WaitForSeconds (timeLimit);
 
 		playing = false;
