@@ -24,6 +24,7 @@ public class Bullet : MonoBehaviour {
 		if (collision.gameObject.CompareTag("asteroid"))
 		{
 			gameController.points++;
+			// TODO Check for combo and multiply
 			gameController.TweenGameObject(gameController.pointsTxt);
 		}
 
