@@ -16,14 +16,4 @@ public class Music : MonoBehaviour {
 	{
 		iTween.AudioTo (gameObject, 0f, 0f, time);
 	}
-
-#if UNITY_EDITOR
-	void OnGUI ()
-	{
-		if (GUILayout.Button("Fade in"))
-			FadeIn(Ship.fireRate);
-		if (GUILayout.Button("Fade out"))
-			FadeOut(Ship.fireRate);
-	}
-#endif
 }

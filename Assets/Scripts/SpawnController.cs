@@ -14,7 +14,7 @@ public class SpawnController : MonoBehaviour {
 
 	
 	void Start () {
-		spawnRate = Ship.fireRate;
+		spawnRate = GameController.tempo * 2;
 
 		if (objectsToSpawn.Length < 1 || spawns.Length < 1 || bgObjectsToSpawn.Length < 1 || spawnsBG1.Length < 1)
 		{

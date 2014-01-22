@@ -481,10 +481,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tiltThreshold: .300000012
   freezeTime: .100000001
+  fireRate: 0
   explosion: {fileID: 100000, guid: 6ea62d4e8979f4cb8ad6c56646a6af9f, type: 2}
   bullet: {fileID: 100002, guid: 415c27ea1cc4f4e5cb4fbc0892bf28e2, type: 2}
   bulletSpeed: 200
   canShoot: 1
+  canMove: 1
   spawns: []
 --- !u!135 &13500000
 SphereCollider:

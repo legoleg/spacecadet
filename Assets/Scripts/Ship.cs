@@ -5,12 +5,14 @@ public class Ship : MonoBehaviour {
 
 	public float tiltThreshold = .3f;
 	public float freezeTime = 0.2f;
-	public static float fireRate = .4f;//0.5217391f;
+	public float fireRate;// = 0.5217391f;
 
 	public GameObject explosion;
 	public GameObject bullet;
 	public int bulletSpeed = 200;
 	public bool canShoot = false;
+	public bool canMove = false;
+
 	public GameObject[] spawns;
 
 	Transform bulletSpawnTransform;
@@ -24,6 +26,7 @@ public class Ship : MonoBehaviour {
 		gameController = GameObject.Find ("GameController").GetComponent<GameController> ();
 		spawnController = GameObject.Find ("SpawnController").GetComponent<SpawnController> ();
 		spawns = spawnController.spawns;
+		fireRate = GameController.tempo;//spawnController.spawnRate * .5f;
 		StartCoroutine(Shoot());
 	}
 
@@ -74,11 +77,13 @@ public class Ship : MonoBehaviour {
 	
 	void Move ()
 	{
-		iTween.MoveTo (this.gameObject, iTween.Hash (
-			"position", new Vector3 (spawns [currPos].transform.position.x, transform.position.y, transform.position.z), 
-			"easetype", iTween.EaseType.spring, 
-			"time", .4f
-			));
+		if (canMove) {
+			iTween.MoveTo (this.gameObject, iTween.Hash (
+				"position", new Vector3 (spawns [currPos].transform.position.x, transform.position.y, transform.position.z), 
+				"easetype", iTween.EaseType.spring, 
+				"time", .4f
+				));
+		}
 	}
 
 	void OnCollisionEnter (Collision collision)
