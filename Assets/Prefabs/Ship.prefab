@@ -484,6 +484,7 @@ MonoBehaviour:
   explosion: {fileID: 100000, guid: 6ea62d4e8979f4cb8ad6c56646a6af9f, type: 2}
   bullet: {fileID: 100002, guid: 415c27ea1cc4f4e5cb4fbc0892bf28e2, type: 2}
   bulletSpeed: 200
+  canShoot: 1
   spawns: []
 --- !u!135 &13500000
 SphereCollider:
@@ -493,7 +494,7 @@ SphereCollider:
   m_GameObject: {fileID: 100008}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: .300000012
   m_Center: {x: 0, y: 0, z: 0}

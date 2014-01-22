@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 //using Facebook;
 using System.Collections.Generic;
@@ -10,7 +9,8 @@ public class GameController : MonoBehaviour
 {
 	public static bool playing = false;
 	public static bool done = false;
-
+	public int lives = 3;
+	public GameObject[] hearts;
 	public int points = 0;
 	// display
 	public GameObject pointsTxt;
@@ -22,13 +22,16 @@ public class GameController : MonoBehaviour
 	private float timeLeft;
 //	public GameObject loadLvlBtn;
 
-	Music music;	
+	Music music;
+	SpawnController spawnController;
+	
 
 	void Start ()
 	{
 		points = 0;
 		playing = false;
 		done = false;
+		spawnController = GameObject.Find ("SpawnController").GetComponent<SpawnController> ();
 		music = GameObject.Find ("Music").GetComponent<Music>();
 		// fade in post-game music
 		music.gameObject.audio.clip = inGameMusic;
@@ -39,8 +42,37 @@ public class GameController : MonoBehaviour
 	void Update ()
 	{
 		pointsTxt.guiText.text = points.ToString();
+
+		for (int i = 0; i < hearts.Length; i++)
+		{
+			if (i >= lives) {
+				iTween.MoveUpdate(hearts[i], iTween.Hash(
+					"position", hearts[i].transform.position + Vector3.down, 
+					"time", 5f,
+					"easetype", iTween.EaseType.easeInOutElastic
+					));
+			}
+		}
 	}
 
+	void ScaleTime (float timeFactor)
+	{
+		Time.timeScale = timeFactor;
+		music.audio.pitch = timeFactor;
+	}
+	
+	public void Lose ()
+	{
+		iTween.ValueTo (gameObject, iTween.Hash (
+			"from", 1f,
+			"to", 0f,
+			"time", spawnController.spawnRate * Mathf.PI,
+			"easetype", iTween.EaseType.easeInQuart,
+			"onupdatetarget", gameObject, 
+			"onupdate", "ScaleTime",
+			"ignoretimescale", true));
+	}
+	
 	public void TweenGameObject (GameObject obj)
 	{
 		iTween.PunchPosition (obj, iTween.Hash ("y", -.05f, "time", .9f));

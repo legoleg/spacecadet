@@ -10,6 +10,7 @@ public class Ship : MonoBehaviour {
 	public GameObject explosion;
 	public GameObject bullet;
 	public int bulletSpeed = 200;
+	public bool canShoot = false;
 	public GameObject[] spawns;
 
 	Transform bulletSpawnTransform;
@@ -28,8 +29,11 @@ public class Ship : MonoBehaviour {
 
 	IEnumerator Shoot ()
 	{
-		GameObject bulletInstance = (GameObject)Instantiate (bullet, bulletSpawnTransform.position, Quaternion.identity);
-		bulletInstance.rigidbody.AddForce(Vector2.up * bulletSpeed, ForceMode.Force);
+		if (canShoot)
+		{
+			GameObject bulletInstance = (GameObject)Instantiate (bullet, bulletSpawnTransform.position, Quaternion.identity);
+			bulletInstance.rigidbody.AddForce(Vector2.up * bulletSpeed, ForceMode.Force);
+		}
 		yield return new WaitForSeconds (fireRate);
 		StartCoroutine(Shoot());
 	}
@@ -81,15 +85,17 @@ public class Ship : MonoBehaviour {
 	{
 		if (collision.gameObject.CompareTag("asteroid"))
 		{
-			gameController.points++;
-			// TODO Check for combo and multiply
-			gameController.TweenGameObject(gameController.pointsTxt);
+			gameController.lives--;
+			if (gameController.lives <= 0)
+			{
+				gameController.Lose ();
+			}
 		}
 		
 		Destroy(collision.gameObject);
 		GameObject explosionInstance = (GameObject)Instantiate (explosion, collision.contacts[0].point, Quaternion.identity);
 		Destroy (explosionInstance, 3f);
-		Destroy (gameObject);
+//		Destroy (gameObject);
 	}
 
 }
