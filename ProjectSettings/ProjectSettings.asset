@@ -10,7 +10,7 @@ PlayerSettings:
   targetGlesGraphics: 1
   targetResolution: 0
   accelerometerFrequency: 60
-  companyName: legoleg
+  companyName: unibrowapps
   productName: SpaceCadet
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -73,11 +73,11 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  iPhoneBundleIdentifier: com.legoleg.SpaceCadet
+  iPhoneBundleIdentifier: com.unibrowapps.SpaceCadet
   productGUID: df723448d2e0e41c690181d9e6f757b3
   iPhoneBundleVersion: 1.0
   AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 9
+  AndroidMinSdkVersion: 10
   AndroidPreferredInstallLocation: 1
   aotOptions: 
   apiCompatibilityLevel: 2
@@ -87,7 +87,7 @@ PlayerSettings:
   ForceSDCardPermission: 0
   CreateWallpaper: 0
   APKExpansionFiles: 0
-  StripUnusedMeshComponents: 0
+  StripUnusedMeshComponents: 1
   iPhoneSdkVersion: 988
   iPhoneTargetOSVersion: 16
   uIPrerenderedIcon: 0
@@ -104,14 +104,26 @@ PlayerSettings:
   iPadHighResLandscapeSplashScreen: {fileID: 0}
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
-  AndroidKeystoreName: 
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: build/user.keystore
+  AndroidKeyaliasName: space cadet prod
   resolutionDialogBanner: {fileID: 0}
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
     - m_Icon: {fileID: 2800000, guid: 7b3d43b5a00064def94962744d957ff7, type: 3}
       m_Size: 128
+  - m_BuildTarget: Android
+    m_Icons:
+    - m_Icon: {fileID: 2800000, guid: 7b3d43b5a00064def94962744d957ff7, type: 3}
+      m_Size: 144
+    - m_Icon: {fileID: 2800000, guid: 915e862b35a584b21918b8c57cfcf7b1, type: 3}
+      m_Size: 96
+    - m_Icon: {fileID: 2800000, guid: 157c70d17b25d4a9a9b0a4f410dde828, type: 3}
+      m_Size: 72
+    - m_Icon: {fileID: 2800000, guid: 8c9ae1d64ce134d2993721963dc7c1ce, type: 3}
+      m_Size: 48
+    - m_Icon: {fileID: 2800000, guid: be464e8567a1f497abca3b85d04301a4, type: 3}
+      m_Size: 36
   m_BuildTargetBatching: []
   webPlayerTemplate: APPLICATION:Black Background
   m_TemplateCustomTags: {}

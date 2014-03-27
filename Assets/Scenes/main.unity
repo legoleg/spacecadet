@@ -2068,7 +2068,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!131 &720382762
 GUITexture:
   m_ObjectHideFlags: 0
@@ -2149,9 +2149,9 @@ GUITexture:
   m_Color: {r: .5, g: .5, b: .5, a: .5}
   m_PixelInset:
     serializedVersion: 2
-    x: -145
+    x: -163.5
     y: 128
-    width: 290
+    width: 327
     height: -128
   m_LeftBorder: 0
   m_RightBorder: 0
@@ -2223,7 +2223,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &910781305
 Transform:
   m_ObjectHideFlags: 0
@@ -3129,9 +3129,9 @@ GUITexture:
   m_Color: {r: .5, g: .5, b: .5, a: .5}
   m_PixelInset:
     serializedVersion: 2
-    x: -145
+    x: -163.5
     y: -128
-    width: 290
+    width: 327
     height: 128
   m_LeftBorder: 0
   m_RightBorder: 0
