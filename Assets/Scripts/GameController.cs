@@ -107,9 +107,8 @@ public class GameController : MonoBehaviour
 		{
 			if (i >= lives) {
 				iTween.MoveUpdate(hearts[i], iTween.Hash(
-					"position", hearts[i].transform.position + Vector3.down, 
-					"time", tempo * 8 - .1f,
-					"easetype", iTween.EaseType.easeOutBack
+					 "position", hearts[i].transform.position + Vector3.up
+					,"time", tempo * 6 - .1f
 					));
 			}
 		}
