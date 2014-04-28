@@ -37,8 +37,8 @@ public class Ship : MonoBehaviour {
 			GameObject bulletInstance = (GameObject)Instantiate (bullet, bulletSpawnTransform.position, Quaternion.identity);
 			bulletInstance.rigidbody.AddForce(Vector2.up * bulletSpeed, ForceMode.Force);
 		}
-		// shoot every 1.333 asteroid
-		yield return new WaitForSeconds (fireRate * 1.333f);
+
+		yield return new WaitForSeconds (fireRate);
 		StartCoroutine(Shoot());
 	}
 
@@ -95,6 +95,7 @@ public class Ship : MonoBehaviour {
 			if (gameController.lives <= 0)
 			{
 				gameController.Lose ();
+				//TODO fade-in time from zero
 			}
 		}
 		

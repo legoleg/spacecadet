@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
 	public int points = 0;
 	// display
 	public GameObject pointsTxt;
+	public GameObject multiplierTxt;
 
 	public AudioClip inGameMusic;
 	public AudioClip pauseMusic;
@@ -25,7 +26,10 @@ public class GameController : MonoBehaviour
 
 	SpawnController spawnController;
 	Music music;
-	Ship ship;	
+	Ship ship;
+	float hitTime;
+
+	
 
 	void Start ()
 	{
@@ -114,6 +118,27 @@ public class GameController : MonoBehaviour
 		}
 	}
 
+	public void AddPoints (int i)
+	{
+		//set time point was added and double points if time since last point was added == Ship.fireRate
+		if (Time.time-hitTime <= ship.fireRate)
+		{
+			Debug.Log((Time.time-hitTime).ToString() + " <=" + ship.fireRate.ToString());
+			//double the points
+			points *= 2;
+			//TODO visualize multiplier
+			TweenGameObject(pointsTxt, -.5f, tempo * 4);
+			TweenGameObject(multiplierTxt, -.7f, tempo * 8);
+		}
+		else 
+		{
+			points += i;
+			TweenGameObject(pointsTxt, .1f, tempo);
+		}
+
+		hitTime = Time.time;
+	}
+
 	void ScaleTime (float timeFactor)
 	{
 		Time.timeScale = timeFactor;
@@ -162,11 +187,12 @@ public class GameController : MonoBehaviour
 //			"oncomplete", "Init"));
 	}
 	
-	public void TweenGameObject (GameObject obj)
+	public void TweenGameObject (GameObject obj, float amount, float time)
 	{
 		iTween.PunchPosition (obj, iTween.Hash (
-			"y", .1f, 
-			"easetype", iTween.EaseType.easeInOutBack,
-			"time", tempo));
+			"easetype", iTween.EaseType.easeInOutBack
+			,"y", amount
+			,"time", time
+			));
 	}
 }
