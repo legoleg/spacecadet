@@ -166,7 +166,7 @@ public class GameController : MonoBehaviour
 	
 	public void Restart ()
 	{
-		Application.LoadLevel(Application.loadedLevel);
+		Application.LoadLevel(0);
 
 //		iTween.CameraFadeDestroy ();
 //		iTween.CameraFadeAdd ();
