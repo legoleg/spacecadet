@@ -34,14 +34,14 @@ public class SpawnController : MonoBehaviour {
 		StartCoroutine (SpawnRoutine());
 	}
 
+	// TODO use this for the background as well
 	IEnumerator SpawnRoutine ()
 	{
 		// instantiate a random object at a random spawnpoint
 		var original = objectsToSpawn [Random.Range (0, objectsToSpawn.Length)];
 		var position = spawns [Random.Range (0, spawns.Length)].transform.position;
-		var rotation = Random.rotation;
-		GameObject obj = (GameObject)Instantiate (original, position, rotation);
-		obj.rigidbody.AddTorque (Random.onUnitSphere*4);
+		GameObject obj = (GameObject)Instantiate (original, position, Quaternion.identity);
+		obj.rigidbody2D.AddTorque (Random.value * 4);
 		obj.renderer.material = hotMaterial;
 
 		//wait and loop
@@ -55,9 +55,8 @@ public class SpawnController : MonoBehaviour {
 		// instantiate a random object at a random spawnpoint
 		var original = bgObjectsToSpawn [Random.Range (0, bgObjectsToSpawn.Length)];
 		var position = spawnsBG1 [Random.Range (0, spawnsBG1.Length)].transform.position;
-		var rotation = Random.rotation;
-		GameObject obj = (GameObject)Instantiate (original, position, rotation);
-		obj.rigidbody.AddTorque (Random.onUnitSphere*4);
+		GameObject obj = (GameObject)Instantiate (original, position, Quaternion.identity);
+		obj.rigidbody2D.AddTorque (Random.value * 4);
 		obj.renderer.material = backMaterials[Random.Range(0,backMaterials.Length)];
 
 		//wait and loop
@@ -71,9 +70,8 @@ public class SpawnController : MonoBehaviour {
 		// instantiate a random object at a random spawnpoint
 		var original = bgObjectsToSpawn [Random.Range (0, bgObjectsToSpawn.Length)];
 		var position = spawnsBG2 [Random.Range (0, spawnsBG2.Length)].transform.position;
-		var rotation = Random.rotation;
-		GameObject obj = (GameObject)Instantiate (original, position, rotation);
-		obj.rigidbody.AddTorque (Random.onUnitSphere*4);
+		GameObject obj = (GameObject)Instantiate (original, position, Quaternion.identity);
+		obj.rigidbody2D.AddTorque (Random.value * 4);
 		obj.renderer.material = backMaterials[Random.Range(0,backMaterials.Length)];
 
 		//wait and loop
