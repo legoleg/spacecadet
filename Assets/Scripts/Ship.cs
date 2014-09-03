@@ -35,7 +35,7 @@ public class Ship : MonoBehaviour {
 		if (canShoot)
 		{
 			GameObject bulletInstance = (GameObject)Instantiate (bullet, bulletSpawnTransform.position, Quaternion.identity);
-			bulletInstance.rigidbody.AddForce(Vector2.up * bulletSpeed, ForceMode.Force);
+			bulletInstance.rigidbody2D.AddForce(Vector2.up * bulletSpeed, ForceMode2D.Force);
 		}
 
 		yield return new WaitForSeconds (fireRate);
@@ -87,7 +87,7 @@ public class Ship : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter (Collision collision)
+	void OnCollisionEnter2D (Collision2D collision)
 	{
 		if (collision.gameObject.CompareTag("asteroid"))
 		{
