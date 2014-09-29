@@ -5,8 +5,8 @@ public class SpawnController : MonoBehaviour {
 
 	public float spawnRate = 2.0869564f;
 	public GameObject[] objectsToSpawn;
-	public Material hotMaterial;
-	public Material[] backMaterials;
+//	public Material hotMaterial;
+//	public Material[] backMaterials;
 	public GameObject[] spawns;
 	public GameObject[] bgObjectsToSpawn;
 	public GameObject[] spawnsBG1;
@@ -42,7 +42,7 @@ public class SpawnController : MonoBehaviour {
 		var position = spawns [Random.Range (0, spawns.Length)].transform.position;
 		GameObject obj = (GameObject)Instantiate (original, position, Quaternion.identity);
 		obj.rigidbody2D.AddTorque (Random.value * 4);
-		obj.renderer.material = hotMaterial;
+//		obj.renderer.material = hotMaterial;
 
 		//wait and loop
 		yield return new WaitForSeconds (spawnRate);
@@ -57,7 +57,7 @@ public class SpawnController : MonoBehaviour {
 		var position = spawnsBG1 [Random.Range (0, spawnsBG1.Length)].transform.position;
 		GameObject obj = (GameObject)Instantiate (original, position, Quaternion.identity);
 		obj.rigidbody2D.AddTorque (Random.value * 4);
-		obj.renderer.material = backMaterials[Random.Range(0,backMaterials.Length)];
+//		obj.renderer.material = backMaterials[Random.Range(0,backMaterials.Length)];
 
 		//wait and loop
 		yield return new WaitForSeconds (spawnRate);
@@ -72,7 +72,7 @@ public class SpawnController : MonoBehaviour {
 		var position = spawnsBG2 [Random.Range (0, spawnsBG2.Length)].transform.position;
 		GameObject obj = (GameObject)Instantiate (original, position, Quaternion.identity);
 		obj.rigidbody2D.AddTorque (Random.value * 4);
-		obj.renderer.material = backMaterials[Random.Range(0,backMaterials.Length)];
+//		obj.renderer.material = backMaterials[Random.Range(0,backMaterials.Length)];
 
 		//wait and loop
 		yield return new WaitForSeconds (spawnRate);
