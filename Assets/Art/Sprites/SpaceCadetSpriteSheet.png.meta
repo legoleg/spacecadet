@@ -27,6 +27,21 @@ TextureImporter:
     21300044: star01
     21300046: asteroid
     21300048: heart
+    21300050: icon144
+    21300052: icon96
+    21300054: icon72
+    21300056: icon48
+    21300058: icon36
+    21300060: avatar
+    21300062: arrowL
+    21300064: arrowR
+    21300066: ship
+    21300068: star0
+    21300070: star1
+    21300072: star2
+    21300074: star3
+    21300076: star4
+    21300078: star5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -46,7 +61,7 @@ TextureImporter:
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: -3
   maxTextureSize: 1024
   textureSettings:
     filterMode: 0
@@ -72,243 +87,83 @@ TextureImporter:
     compressionQuality: 50
   spriteSheet:
     sprites:
-    - name: bullet01
+    - name: icon144
       rect:
         serializedVersion: 2
         x: 0
-        y: 201
-        width: 8
+        y: 410
+        width: 144
+        height: 144
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: icon96
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 314
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: icon72
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 242
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: icon48
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 194
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: icon36
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 158
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: avatar
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 127
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: arrowL
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 94
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: bullet02
+    - name: arrowR
       rect:
         serializedVersion: 2
-        x: 8
-        y: 201
-        width: 8
+        x: 0
+        y: 62
+        width: 32
         height: 32
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: explosion01
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 137
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: explosion02
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 137
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: explosion03
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 137
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: explosion04
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 137
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: explosion05
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 137
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: explosion06
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 137
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: explosion07
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 137
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: explosion08
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 137
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: explosion09
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 137
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: flame01
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 121
-        width: 8
-        height: 16
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: flame02
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 121
-        width: 8
-        height: 16
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: flame03
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 121
-        width: 8
-        height: 16
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: flame04
-      rect:
-        serializedVersion: 2
-        x: 24
-        y: 121
-        width: 8
-        height: 16
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: ship01
-      rect:
-        serializedVersion: 2
-        x: 4
-        y: 65
-        width: 24
-        height: 53
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpaceCadetSpriteSheet_16
-      rect:
-        serializedVersion: 2
-        x: 36
-        y: 65
-        width: 24
-        height: 53
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: star06
-      rect:
-        serializedVersion: 2
-        x: 45
-        y: 48
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: star05
-      rect:
-        serializedVersion: 2
-        x: 36
-        y: 48
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: star04
-      rect:
-        serializedVersion: 2
-        x: 27
-        y: 48
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: star03
-      rect:
-        serializedVersion: 2
-        x: 18
-        y: 48
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: star02
-      rect:
-        serializedVersion: 2
-        x: 9
-        y: 48
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: star01
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 48
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: asteroid
-      rect:
-        serializedVersion: 2
-        x: 3
-        y: 20
-        width: 25
-        height: 25
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -316,9 +171,79 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 0
-        width: 15
-        height: 16
+        y: 31
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ship
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 2
+        width: 11
+        height: 26
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: star0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 558
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: star1
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 557
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: star2
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 556
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: star3
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 555
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: star4
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 554
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: star5
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 554
+        width: 9
+        height: 9
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
