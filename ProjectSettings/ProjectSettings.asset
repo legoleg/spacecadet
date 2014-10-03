@@ -104,19 +104,19 @@ PlayerSettings:
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
-    - m_Icon: {fileID: 2800000, guid: 7b3d43b5a00064def94962744d957ff7, type: 3}
+    - m_Icon: {fileID: 2800000, guid: 60ae965b56f504861ab3317eb9a3f23d, type: 3}
       m_Size: 128
   - m_BuildTarget: Android
     m_Icons:
-    - m_Icon: {fileID: 2800000, guid: 7b3d43b5a00064def94962744d957ff7, type: 3}
+    - m_Icon: {fileID: 2800000, guid: 40db626a3070f43c2b1b7430af5a4718, type: 3}
       m_Size: 144
-    - m_Icon: {fileID: 2800000, guid: 915e862b35a584b21918b8c57cfcf7b1, type: 3}
+    - m_Icon: {fileID: 2800000, guid: d0e2f544db7784ef68e1530c644422a0, type: 3}
       m_Size: 96
-    - m_Icon: {fileID: 2800000, guid: 157c70d17b25d4a9a9b0a4f410dde828, type: 3}
+    - m_Icon: {fileID: 2800000, guid: d1bb4c1b9ec824dc2b39d4d1a3587d48, type: 3}
       m_Size: 72
-    - m_Icon: {fileID: 2800000, guid: 8c9ae1d64ce134d2993721963dc7c1ce, type: 3}
+    - m_Icon: {fileID: 2800000, guid: 6051e68de204c43c491841b9d2967627, type: 3}
       m_Size: 48
-    - m_Icon: {fileID: 2800000, guid: be464e8567a1f497abca3b85d04301a4, type: 3}
+    - m_Icon: {fileID: 2800000, guid: 16382ab26bf5447398f8402544c307fd, type: 3}
       m_Size: 36
   m_BuildTargetBatching: []
   webPlayerTemplate: APPLICATION:Black Background

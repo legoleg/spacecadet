@@ -18,7 +18,7 @@ TextureImporter:
     21300026: flame03
     21300028: flame04
     21300030: ship01
-    21300032: SpaceCadetSpriteSheet_16
+    21300032: asteroid
     21300034: star06
     21300036: star05
     21300038: star04
@@ -244,6 +244,16 @@ TextureImporter:
         y: 554
         width: 9
         height: 9
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: asteroid
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 3
+        width: 25
+        height: 25
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
