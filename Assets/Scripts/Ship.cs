@@ -27,6 +27,7 @@ public class Ship : MonoBehaviour {
 		spawnController = GameObject.Find ("SpawnController").GetComponent<SpawnController> ();
 		spawns = spawnController.spawns;
 		fireRate = GameController.tempo;//spawnController.spawnRate * .5f;
+		//TODO try timing the shot in another way than coroutines
 		StartCoroutine(Shoot());
 	}
 
@@ -92,6 +93,7 @@ public class Ship : MonoBehaviour {
 		if (collision.gameObject.CompareTag("asteroid"))
 		{
 			gameController.lives--;
+			gameController.HideNextHeart();
 			if (gameController.lives <= 0)
 			{
 				gameController.Lose ();

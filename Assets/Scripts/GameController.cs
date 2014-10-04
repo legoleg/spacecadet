@@ -10,9 +10,9 @@ public class GameController : MonoBehaviour
 {
 	public Texture2D cameraTexture;
 	// set this to match the BMP of the music: 0.5 = 120 bpm, 1 = 60 bpm, 2 = 30 bpm
-	public static float tempo = 1f;// 0.5217391f;
+	public static float tempo = .5f;
 	public int lives = 3;
-	public Texture[] hearts;
+	public RectTransform[] hearts;
 	public int points = 0;
 	// UI
 	public Text pointsTxt;
@@ -20,11 +20,8 @@ public class GameController : MonoBehaviour
 	// Music
 	public AudioClip inGameMusic;
 	public AudioClip pauseMusic;
-
-	public float timeLimit = 120f;
-	private float timeLeft;
-
 	Music music;
+
 	Ship ship;
 	float hitTime;
 
@@ -54,11 +51,11 @@ public class GameController : MonoBehaviour
 		yield return new WaitForSeconds (fadeTime);
 		iTween.CameraFadeDestroy();
 
-//		foreach (Texture heart in hearts) 
-//		{
-//			yield return new WaitForSeconds (.1f);
-//			iTween.MoveFrom(heart, iTween.Hash("position", heart.transform.position + Vector3.down, "time", fadeTime,"easetype", iTween.EaseType.easeInOutBack));
-//		}
+		// TODO animate heart from invisible to visible states
+		foreach (RectTransform heart in hearts) {
+			yield return new WaitForSeconds (.1f);
+			heart.GetComponent<Animator>().SetBool("visible", true);
+		}
 		
 		yield return new WaitForSeconds (.2f);
 		pointsTxt.enabled = true;
@@ -90,22 +87,13 @@ public class GameController : MonoBehaviour
 	void Update ()
 	{
 		pointsTxt.text = points.ToString();
-
-		// TODO move to where the points are subtracted
-//		for (int i = 0; i < hearts.Length; i++)
-//		{
-//			if (i >= lives) {
-//				iTween.MoveUpdate(hearts[i], iTween.Hash("position", hearts[i].transform.position + Vector3.up,"time", tempo * 6 - .1f));
-//			}
-//		}
 	}
 
 	public void AddPoints (int i)
 	{
 		//set time point was added and double points if time since last point was added == Ship.fireRate
-		if (Time.time-hitTime <= ship.fireRate)
-		{
-			Debug.Log((Time.time-hitTime).ToString() + " <=" + ship.fireRate.ToString());
+		if (Time.time-hitTime <= ship.fireRate) {
+//			Debug.Log((Time.time-hitTime).ToString() + " <=" + ship.fireRate.ToString());
 			//double the points
 			points *= 2;
 			//TODO visualize multiplier
@@ -126,9 +114,12 @@ public class GameController : MonoBehaviour
 		Time.timeScale = timeFactor;
 		music.audio.pitch = timeFactor;
 	}
+
+	public void HideNextHeart () {
+		hearts[lives].GetComponent<Animator>().SetBool("visible", false);
+	}
 	
-	public void Lose ()
-	{
+	public void Lose () {
 		ship.canShoot = false;
 		ship.canMove = false;
 
