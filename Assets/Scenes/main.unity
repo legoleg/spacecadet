@@ -330,7 +330,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &207506592
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1997,7 +1997,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1149154676
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3229,7 +3229,7 @@ RectTransform:
   m_RootOrder: 8
   m_AnchorMin: {x: .5, y: 1}
   m_AnchorMax: {x: .5, y: 1}
-  m_AnchoredPosition: {x: 124, y: 100}
+  m_AnchoredPosition: {x: 124, y: 36}
   m_SizeDelta: {x: 250, y: 36}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1454059650
@@ -3244,7 +3244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Mat: {fileID: 0}
-  m_Color: {r: .839215696, g: .576470613, b: .247058824, a: 1}
+  m_Color: {r: .890196085, g: .768627465, b: .36470589, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 353770f97bd0e4e74b4b140097938969, type: 3}
     m_FontSize: 36
@@ -3257,7 +3257,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Doubled !
+  m_Text: +160
 --- !u!222 &1454059651
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3607,6 +3607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTexture: {fileID: 2800000, guid: 880b47af6be814793ad212cddbf6e03a, type: 3}
+  tempo: .666000009
   lives: 3
   hearts:
   - {fileID: 1811815885}

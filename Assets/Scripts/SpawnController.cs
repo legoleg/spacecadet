@@ -9,7 +9,7 @@ public class SpawnController : MonoBehaviour {
 
 	
 	void Start () {
-		spawnRate = GameController.tempo * 2;
+		spawnRate = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().tempo;
 
 		if (objectsToSpawn.Length < 1 || spawns.Length < 1) {
 			Debug.LogError("Assign GameObjects...");
@@ -28,8 +28,7 @@ public class SpawnController : MonoBehaviour {
 		// instantiate a random object at a random spawnpoint
 		var original = objectsToSpawn [Random.Range (0, objectsToSpawn.Length)];
 		var position = spawns [Random.Range (0, spawns.Length)].transform.position;
-		GameObject obj = (GameObject)Instantiate (original, position, Quaternion.identity);
-//		obj.rigidbody2D.AddTorque (Random.value * 4);
+		Instantiate (original, position, Quaternion.identity);
 
 		//wait and loop
 		yield return new WaitForSeconds (spawnRate);

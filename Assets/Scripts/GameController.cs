@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
 {
 	public Texture2D cameraTexture;
 	// set this to match the BMP of the music: 0.5 = 120 bpm, 1 = 60 bpm, 2 = 30 bpm
-	public static float tempo = .5f;
+	public float tempo = .666f;
 	public int lives = 3;
 	public RectTransform[] hearts;
 	public int points = 0;
@@ -94,19 +94,20 @@ public class GameController : MonoBehaviour
 		//set time point was added and double points if time since last point was added == Ship.fireRate
 		if (Time.time-hitTime <= ship.fireRate) {
 //			Debug.Log((Time.time-hitTime).ToString() + " <=" + ship.fireRate.ToString());
-			//double the points
-			points *= 2;
-			//TODO visualize multiplier
-			TweenGameObject(pointsTxt.gameObject, -.5f, tempo * 4);
-			TweenGameObject(multiplierTxt.gameObject, -.7f, tempo * 8);
-		}
-		else 
-		{
+			// The "magic number" of people needed to create a viable population for multi-generational space travel has been calculated by researchers. It is about the size of a small village - 160. But with some social engineering it might even be possible to halve this to 80.
+			points += 160;
+			TweenGameObject(pointsTxt.gameObject, 50f, tempo * 2);
+			TweenGameObject(multiplierTxt.gameObject, -300f, 5f);
+		} else {
 			points += i;
-			TweenGameObject(pointsTxt.gameObject, .1f, tempo);
+			TweenGameObject(pointsTxt.gameObject, 25f, tempo);
 		}
 
 		hitTime = Time.time;
+	}
+
+	void AnimateMultilpierText (float timeFactor) {
+		multiplierTxt.rectTransform.anchoredPosition = new Vector2(multiplierTxt.rectTransform.anchoredPosition.x, timeFactor);
 	}
 
 	void ScaleTime (float timeFactor)
@@ -116,7 +117,11 @@ public class GameController : MonoBehaviour
 	}
 
 	public void HideNextHeart () {
-		hearts[lives].GetComponent<Animator>().SetBool("visible", false);
+		if (hearts[lives]) {
+//			hearts[lives].GetComponent<Animator>().SetBool("visible", false);
+			TweenGameObject (hearts[lives].gameObject, -200, 5f);
+			Destroy (hearts[lives].gameObject, 5f);
+		}
 	}
 	
 	public void Lose () {
@@ -128,7 +133,7 @@ public class GameController : MonoBehaviour
 		iTween.ValueTo (gameObject, iTween.Hash (
 			"from", 1f,
 			"to", 0f,
-			"time", tempo * 2,
+			"time", tempo * 3,
 			"easetype", iTween.EaseType.easeInOutSine,
 			"ignoretimescale", true,
 			"onupdatetarget", gameObject, 
@@ -140,24 +145,6 @@ public class GameController : MonoBehaviour
 	public void Restart ()
 	{
 		Application.LoadLevel(0);
-
-//		iTween.CameraFadeDestroy ();
-//		iTween.CameraFadeAdd ();
-//		iTween.CameraFadeFrom (iTween.Hash (
-//			"amount", 1f, 
-//			"time", tempo - .1f, 
-//			"ignoretimescale", true));
-//
-//		iTween.ValueTo (gameObject, iTween.Hash (
-//			"from", 0f,
-//			"to", 1f,
-//			"time", tempo,
-//			"easetype", iTween.EaseType.easeInOutSine,
-//			"ignoretimescale", true,
-//			"onupdatetarget", gameObject, 
-//			"onupdate", "ScaleTime",
-//			"onCompleteTarget",gameObject,
-//			"oncomplete", "Init"));
 	}
 	
 	public void TweenGameObject (GameObject obj, float amount, float time)

@@ -26,7 +26,7 @@ public class Ship : MonoBehaviour {
 		gameController = GameObject.Find ("GameController").GetComponent<GameController> ();
 		spawnController = GameObject.Find ("SpawnController").GetComponent<SpawnController> ();
 		spawns = spawnController.spawns;
-		fireRate = GameController.tempo;//spawnController.spawnRate * .5f;
+		fireRate = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().tempo;
 		//TODO try timing the shot in another way than coroutines
 		StartCoroutine(Shoot());
 	}
