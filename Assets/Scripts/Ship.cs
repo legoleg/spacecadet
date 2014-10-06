@@ -92,13 +92,7 @@ public class Ship : MonoBehaviour {
 	{
 		if (collision.gameObject.CompareTag("asteroid"))
 		{
-			gameController.lives--;
-			gameController.HideNextHeart();
-			if (gameController.lives <= 0)
-			{
-				gameController.Lose ();
-				//TODO fade-in time from zero
-			}
+			gameController.LoseHeart();
 		}
 		
 		Destroy(collision.gameObject);
