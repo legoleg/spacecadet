@@ -20,9 +20,9 @@ public class Bullet : MonoBehaviour {
 		gameController = GameObject.FindWithTag ("GameController").GetComponent<GameController>();
 	}
 
-	void OnCollisionEnter (Collision collision)
+	void OnCollisionEnter2D (Collision2D collision)
 	{
-		if (collision.gameObject.CompareTag("asteroid"))
+		if (collision.gameObject.tag == "asteroid")
 		{
 			gameController.AddPoints(1);
 		}

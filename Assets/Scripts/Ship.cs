@@ -26,7 +26,8 @@ public class Ship : MonoBehaviour {
 		gameController = GameObject.Find ("GameController").GetComponent<GameController> ();
 		spawnController = GameObject.Find ("SpawnController").GetComponent<SpawnController> ();
 		spawns = spawnController.spawns;
-		fireRate = GameController.tempo;//spawnController.spawnRate * .5f;
+		fireRate = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().tempo;
+		//TODO try timing the shot in another way than coroutines
 		StartCoroutine(Shoot());
 	}
 
@@ -35,7 +36,7 @@ public class Ship : MonoBehaviour {
 		if (canShoot)
 		{
 			GameObject bulletInstance = (GameObject)Instantiate (bullet, bulletSpawnTransform.position, Quaternion.identity);
-			bulletInstance.rigidbody.AddForce(Vector2.up * bulletSpeed, ForceMode.Force);
+			bulletInstance.rigidbody2D.AddForce(Vector2.up * bulletSpeed, ForceMode2D.Force);
 		}
 
 		yield return new WaitForSeconds (fireRate);
@@ -87,16 +88,11 @@ public class Ship : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter (Collision collision)
+	void OnCollisionEnter2D (Collision2D collision)
 	{
 		if (collision.gameObject.CompareTag("asteroid"))
 		{
-			gameController.lives--;
-			if (gameController.lives <= 0)
-			{
-				gameController.Lose ();
-				//TODO fade-in time from zero
-			}
+			gameController.LoseHeart();
 		}
 		
 		Destroy(collision.gameObject);

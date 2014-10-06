@@ -3,7 +3,7 @@ using System.Collections;
 
 public class KillingFloor : MonoBehaviour {
 
-	void OnTriggerEnter(Collider other)
+	void OnCollisionEnter2D(Collision2D other)
 	{
 		Destroy(other.gameObject);
 	}
