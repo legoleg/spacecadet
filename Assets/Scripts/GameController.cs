@@ -12,15 +12,19 @@ public class GameController : MonoBehaviour
 	// set this to match the BMP of the music: 0.5 = 120 bpm, 1 = 60 bpm, 2 = 30 bpm
 	public float tempo = .666f;
 	public int lives = 3;
-	public RectTransform[] hearts;
+	public Image[] hearts;
 	public int points = 0;
 	// UI
+	public Button buttonLeft;
+	public Button buttonRight;
 	public Text pointsTxt;
 	public Text multiplierTxt;
 	// Music
 	public AudioClip inGameMusic;
 	public AudioClip pauseMusic;
 	Music music;
+
+	float fadingTime;
 
 	Ship ship;
 	float hitTime;
@@ -33,8 +37,18 @@ public class GameController : MonoBehaviour
 
 		points = 0;
 		Time.timeScale = 1f;
-		
+		fadingTime = tempo * 3 - .1f;
+
 		var fadeTime  = tempo * 2 - .1f;
+
+		// disable UI elements that slide in on the screen
+		pointsTxt.enabled = false;
+		buttonLeft.image.enabled = false;
+		buttonRight.image.enabled = false;
+
+		foreach (Image heart in hearts) {
+			heart.enabled = false;
+		}
 		StartCoroutine(FadeIn(fadeTime));
 		
 		// fade in music 
@@ -56,24 +70,41 @@ public class GameController : MonoBehaviour
 		iTween.CameraFadeDestroy();
 
 		// tween heart from invisible to visible positions
-		foreach (RectTransform heart in hearts) {
+		foreach (Image heart in hearts) {
 			yield return new WaitForSeconds (.1f);
-			iTween.MoveTo(heart.gameObject, iTween.Hash(
-				"y", 50f
+			heart.enabled = true;
+			iTween.MoveFrom(heart.gameObject, iTween.Hash(
+				"y", -50f
 				, "time", tempo
 				, "easetype", iTween.EaseType.easeOutBack
 				));
 		}
-		
-		yield return new WaitForSeconds (.2f);
+
+		// Point text slides in
+		yield return new WaitForSeconds (.1f);
 		pointsTxt.enabled = true;
 		iTween.MoveFrom(pointsTxt.gameObject, iTween.Hash(
-			"position", pointsTxt.transform.position + Vector3.up
-			, "time", fadeTime
-			, "easetype", iTween.EaseType.easeInOutBack
+			"x", Screen.width
+			, "time", tempo
+			, "easetype", iTween.EaseType.easeOutBack
 			));
 
-		// TODO animate control buttons
+		// Left and Right Buttons slides in
+		yield return new WaitForSeconds (.1f);
+
+		buttonLeft.image.enabled = true;
+		iTween.MoveFrom(buttonLeft.gameObject, iTween.Hash(
+			"x", -96
+			, "time", tempo
+			, "easetype", iTween.EaseType.easeOutBack
+			));
+
+		buttonRight.image.enabled = true;
+		iTween.MoveFrom(buttonRight.gameObject, iTween.Hash(
+			"x", 96+Screen.width
+			, "time", tempo
+			, "easetype", iTween.EaseType.easeOutBack
+			));
 
 		ship.canMove = true;
 		ship.canShoot = true;
@@ -122,13 +153,14 @@ public class GameController : MonoBehaviour
 		ship.canShoot = false;
 		ship.canMove = false;
 
+		StartCoroutine (MoveUIToLosePosition());
 		StartCoroutine (FadeOut());
 
 		// Send fading time scale to ScaleTime
 		iTween.ValueTo (gameObject, iTween.Hash (
 			"from", 1f
 			,"to", 0f
-			,"time", tempo * 3
+			,"time", fadingTime
 			,"easetype", iTween.EaseType.easeInOutSine
 			,"ignoretimescale", true
 			,"onupdatetarget", gameObject
@@ -137,17 +169,44 @@ public class GameController : MonoBehaviour
 			,"oncomplete", "Restart"
 			));
 	}
+
+	IEnumerator MoveUIToLosePosition ()
+	{
+		// Left and Right Buttons slides in
+		yield return new WaitForSeconds (.1f);
+		
+		iTween.MoveTo(buttonLeft.gameObject, iTween.Hash(
+			"x", -96
+			, "time", tempo
+			, "easetype", iTween.EaseType.easeOutBack
+			));
+		buttonLeft.image.enabled = false;
+		
+		iTween.MoveTo(buttonRight.gameObject, iTween.Hash(
+			"x", 96+Screen.width
+			, "time", tempo
+			, "easetype", iTween.EaseType.easeOutBack
+			));
+		buttonRight.image.enabled = false;
+
+		// Point text slides in
+		yield return new WaitForSeconds (.1f);
+		iTween.MoveTo(pointsTxt.gameObject, iTween.Hash(
+			"y", Screen.height/2
+			, "time", tempo
+			, "easetype", iTween.EaseType.easeOutBack
+			));
+
+	}
 	
 	IEnumerator FadeOut ()
 	{
-		var fadeTime = tempo * 4 - .1f;
-		
 		iTween.CameraFadeAdd(cameraTexture);
 		iTween.CameraFadeTo(iTween.Hash (
 			"amount", 1f, 
-			"time", fadeTime, 
+			"time", fadingTime, 
 			"ignoretimescale", true));
-		yield return new WaitForSeconds (fadeTime);
+		yield return new WaitForSeconds (fadingTime);
 		iTween.CameraFadeDestroy();
 	}
 	
