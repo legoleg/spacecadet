@@ -111,19 +111,27 @@ public class GameController : MonoBehaviour
 	}
 
 	public void AddPoints (int i) {
+		StartCoroutine(PointRoutine (i));
+
+	}
+
+	IEnumerator PointRoutine (int i)
+	{
 		// Set the time that points was added and give an award two targets are hit at the same time
 		if (Time.time - hitTime <= ship.fireRate) {
-			Debug.Log((Time.time-hitTime).ToString() + " <=" + ship.fireRate.ToString());
-
+			Debug.Log ((Time.time - hitTime).ToString () + " <=" + ship.fireRate.ToString ());
 			// Why 160? https://twitter.com/_legoleg/status/519207539603681280 @korumellis digs it on Mars One?
 			points += 160;
-			TweenGameObject(pointsTxt.gameObject, 50f, tempo * 2);
-			TweenGameObject(multiplierTxt.gameObject, -350f, 5f);
-		} else {
-			points += i;
-			TweenGameObject(pointsTxt.gameObject, 25f, tempo);
+			TweenGameObject (pointsTxt.gameObject, 50f, tempo * 2);
+			iTween.MoveBy (multiplierTxt.gameObject, iTween.Hash ("easetype", iTween.EaseType.easeInOutExpo, "y", -350, "time", 4f));
+			yield return new WaitForSeconds (.5f);
+			iTween.MoveBy (multiplierTxt.gameObject, iTween.Hash ("easetype", iTween.EaseType.easeInOutExpo, "y", 350, "time", 4f));
 		}
-
+		else {
+			points += i;
+			TweenGameObject (pointsTxt.gameObject, 25f, tempo);
+		}
+		yield return new WaitForSeconds (.5f);
 		hitTime = Time.time;
 	}
 
