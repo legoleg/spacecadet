@@ -226,7 +226,8 @@ public class GameController : MonoBehaviour
 	
 	public void Restart ()
 	{
-		Application.LoadLevel(0);
+		Time.timeScale = 1f;
+		Application.LoadLevel("menu");
 	}
 	
 	public void TweenGameObject (GameObject obj, float amount, float time)

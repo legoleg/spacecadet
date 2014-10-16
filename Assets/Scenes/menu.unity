@@ -1462,7 +1462,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: .501960814, g: .501960814, b: .501960814, a: .501960814}
     m_HighlightedColor: {r: .501960814, g: .501960814, b: .501960814, a: .698039234}
@@ -1485,7 +1485,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1239059275}
-        m_MethodName: LoadGameScene
+        m_MethodName: LoadNextScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1534,10 +1534,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1239059270}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1430883bfeb75401a8bcb889c06732e8, type: 3}
+  m_Script: {fileID: 11500000, guid: e0f59a86b476247369eda21274d3d87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  touch2Watch: 64
 --- !u!1 &1261071823
 GameObject:
   m_ObjectHideFlags: 0
@@ -1716,10 +1715,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1278432307}
   m_RootOrder: 0
-  m_AnchorMin: {x: .5, y: 1}
-  m_AnchorMax: {x: .5, y: 1}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -92}
-  m_SizeDelta: {x: 512, y: 92}
+  m_SizeDelta: {x: 0, y: 92}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1382294430
 MonoBehaviour:
@@ -1736,11 +1735,11 @@ MonoBehaviour:
   m_Color: {r: .200000003, g: .247058824, b: .313725501, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 6facc30325d1f443087726d18d4d4f87, type: 3}
-    m_FontSize: 9
+    m_FontSize: 8
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 7
-    m_MaxSize: 9
+    m_MinSize: 8
+    m_MaxSize: 8
     m_Alignment: 4
     m_RichText: 0
     m_HorizontalOverflow: 1
@@ -1951,11 +1950,11 @@ MonoBehaviour:
   m_Color: {r: .200000003, g: .247058824, b: .313725501, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 6facc30325d1f443087726d18d4d4f87, type: 3}
-    m_FontSize: 20
+    m_FontSize: 8
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 7
-    m_MaxSize: 9
+    m_BestFit: 1
+    m_MinSize: 8
+    m_MaxSize: 8
     m_Alignment: 4
     m_RichText: 0
     m_HorizontalOverflow: 1
