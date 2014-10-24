@@ -9,11 +9,11 @@ using System.Collections.Generic;
 public class GameController : MonoBehaviour
 {
 	public Texture2D cameraTexture;
-	// set this to match the BMP of the music: 0.5 = 120 bpm, 1 = 60 bpm, 2 = 30 bpm
-	public float tempo = .666f;
-	public int lives = 3;
+	// set this to match the BMP of the music: 0.5 = 4/4 or 120 bpm, 2/4 or 1 = 60 bpm, 2 = 1/4 or 30 bpm, 0.66667 = 3/4
+	public float tempo = .66667f;
+	int lives = 3;
 	public Image[] hearts;
-	public int points = 0;
+	public static int points = 0;
 	// UI
 	public Button buttonLeft;
 	public Button buttonRight;
@@ -25,15 +25,12 @@ public class GameController : MonoBehaviour
 	Music music;
 
 	float fadingTime;
-
-	Ship ship;
 	float hitTime;
 		
 
 	void Start ()
 	{
 		music = GameObject.Find ("Music").GetComponent<Music>();
-		ship = GameObject.Find ("Ship").GetComponent<Ship>();
 
 		points = 0;
 		Time.timeScale = 1f;
@@ -106,8 +103,8 @@ public class GameController : MonoBehaviour
 			, "easetype", iTween.EaseType.easeOutBack
 			));
 
-		ship.canMove = true;
-		ship.canShoot = true;
+		Ship.canMove = true;
+		Ship.canShoot = true;
 	}
 
 	public void AddPoints (int i) {
@@ -118,8 +115,8 @@ public class GameController : MonoBehaviour
 	IEnumerator PointRoutine (int i)
 	{
 		// Set the time that points was added and give an award two targets are hit at the same time
-		if (Time.time - hitTime <= ship.fireRate) {
-			Debug.Log ((Time.time - hitTime).ToString () + " <=" + ship.fireRate.ToString ());
+		if (Time.time - hitTime <= tempo) {
+			Debug.Log ((Time.time - hitTime).ToString () + " <=" + tempo.ToString ());
 			// Why 160? https://twitter.com/_legoleg/status/519207539603681280 @korumellis digs it on Mars One?
 			points += 160;
 			TweenGameObject (pointsTxt.gameObject, 50f, tempo * 2);
@@ -158,8 +155,8 @@ public class GameController : MonoBehaviour
 	}
 
 	public void Lose () {
-		ship.canShoot = false;
-		ship.canMove = false;
+		Ship.canShoot = false;
+		Ship.canMove = false;
 
 		StartCoroutine (MoveUIToLosePosition());
 		StartCoroutine (FadeOut());

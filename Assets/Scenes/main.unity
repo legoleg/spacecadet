@@ -1474,14 +1474,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca11efd2014254d6fb0e1481c78ba503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiltThreshold: .300000012
-  freezeTime: .100000001
-  fireRate: 0
   explosion: {fileID: 100000, guid: 0c527bc558f9c422fa68a891b5d4bf5d, type: 2}
   bullet: {fileID: 100002, guid: 415c27ea1cc4f4e5cb4fbc0892bf28e2, type: 2}
   bulletSpeed: 200
-  canShoot: 0
-  canMove: 0
   spawns: []
 --- !u!60 &408649664
 PolygonCollider2D:

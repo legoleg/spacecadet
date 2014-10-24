@@ -3,18 +3,15 @@ using System.Collections;
 
 public class Ship : MonoBehaviour {
 
-	public float tiltThreshold = .3f;
-	public float freezeTime = 0.2f;
-	public float fireRate;// = 0.5217391f;
-
 	public GameObject explosion;
 	public GameObject bullet;
 	public int bulletSpeed = 200;
-	public bool canShoot = false;
-	public bool canMove = false;
+	public static bool canShoot = false;
+	public static bool canMove = false;
 
 	public GameObject[] spawns;
 
+	float tempo;
 	Transform bulletSpawnTransform;
 	GameController gameController;
 	SpawnController spawnController;
@@ -25,7 +22,7 @@ public class Ship : MonoBehaviour {
 		gameController = GameObject.Find ("GameController").GetComponent<GameController> ();
 		spawnController = GameObject.Find ("SpawnController").GetComponent<SpawnController> ();
 		spawns = spawnController.spawns;
-		fireRate = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().tempo;
+		tempo = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().tempo;
 		//TODO try timing the shot in another way than coroutines
 		StartCoroutine(Shoot());
 	}
@@ -36,7 +33,7 @@ public class Ship : MonoBehaviour {
 			bulletInstance.rigidbody2D.AddForce(Vector2.up * bulletSpeed, ForceMode2D.Force);
 		}
 
-		yield return new WaitForSeconds (fireRate);
+		yield return new WaitForSeconds (tempo);
 		StartCoroutine(Shoot());
 	}
 
