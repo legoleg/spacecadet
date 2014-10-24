@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-//using Facebook;
 using System.Collections.Generic;
-//using Parse;
-//using System.Threading.Tasks;
+using System.Globalization;
 
 public class GameController : MonoBehaviour
 {
@@ -56,9 +54,13 @@ public class GameController : MonoBehaviour
 
 	void Update ()
 	{
-		pointsTxt.text = points.ToString();
+		// Displaying the points with the specified thousand-separator. Thanks to http://stackoverflow.com/a/752167/229507
+		NumberFormatInfo numberFormatInfo = (NumberFormatInfo) CultureInfo.InvariantCulture.NumberFormat.Clone();
+		numberFormatInfo.NumberGroupSeparator = " ";
+
+		pointsTxt.text = System.Convert.ToInt32(points).ToString("N0", numberFormatInfo);
 	}
-	
+
 	IEnumerator FadeIn (float fadeTime)
 	{
 		iTween.CameraFadeAdd(cameraTexture);

@@ -1971,7 +1971,7 @@ RectTransform:
   m_RootOrder: 5
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -18}
+  m_AnchoredPosition: {x: 0, y: -48}
   m_SizeDelta: {x: 0, y: 96}
   m_Pivot: {x: .5, y: 1}
 --- !u!114 &812801725
@@ -1999,7 +1999,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10550
+  m_Text: 21 350
 --- !u!222 &812801726
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3576,12 +3576,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTexture: {fileID: 2800000, guid: 880b47af6be814793ad212cddbf6e03a, type: 3}
   tempo: .666000009
-  lives: 3
   hearts:
   - {fileID: 1811815886}
   - {fileID: 1708995183}
   - {fileID: 667993774}
-  points: 0
   buttonLeft: {fileID: 664932820}
   buttonRight: {fileID: 72589000}
   pointsTxt: {fileID: 812801725}
