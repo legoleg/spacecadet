@@ -20,8 +20,7 @@ public class Ship : MonoBehaviour {
 	SpawnController spawnController;
 	int currPos = 1;
 
-	void Start ()
-	{
+	void Start () {
 		bulletSpawnTransform = GameObject.Find ("BulletSpawnPoint").transform;
 		gameController = GameObject.Find ("GameController").GetComponent<GameController> ();
 		spawnController = GameObject.Find ("SpawnController").GetComponent<SpawnController> ();
@@ -31,10 +30,8 @@ public class Ship : MonoBehaviour {
 		StartCoroutine(Shoot());
 	}
 
-	IEnumerator Shoot ()
-	{
-		if (canShoot)
-		{
+	IEnumerator Shoot () {
+		if (canShoot) {
 			GameObject bulletInstance = (GameObject)Instantiate (bullet, bulletSpawnTransform.position, Quaternion.identity);
 			bulletInstance.rigidbody2D.AddForce(Vector2.up * bulletSpeed, ForceMode2D.Force);
 		}
@@ -43,23 +40,19 @@ public class Ship : MonoBehaviour {
 		StartCoroutine(Shoot());
 	}
 
-	void Update ()
-	{
+	void Update () {
 #if UNITY_EDITOR
 		// get input from keyboard
-		if (Input.GetKeyDown("left"))
-		{
+		if (Input.GetKeyDown("left")) {
 			MoveLeft();
 		}	
-		else if (Input.GetKeyDown("right"))
-		{
+		else if (Input.GetKeyDown("right")) {
 			MoveRight();
 		}
 #endif
 	}
 	
-	public void MoveLeft ()
-	{
+	public void MoveLeft () {
 		//only move 
 		if (currPos > 0) {
 			currPos--;
@@ -68,8 +61,7 @@ public class Ship : MonoBehaviour {
 		}
 	}
 	
-	public void MoveRight ()
-	{
+	public void MoveRight () {
 		if (currPos < spawns.Length-1) {
 			currPos++;
 			//do the movement
@@ -77,8 +69,7 @@ public class Ship : MonoBehaviour {
 		}
 	}
 	
-	void Move ()
-	{
+	void Move () {
 		if (canMove) {
 			iTween.MoveTo (this.gameObject, iTween.Hash (
 				"position", new Vector3 (spawns [currPos].transform.position.x, transform.position.y, transform.position.z), 
@@ -88,8 +79,7 @@ public class Ship : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter2D (Collision2D collision)
-	{
+	void OnCollisionEnter2D (Collision2D collision) {
 		if (collision.gameObject.CompareTag("asteroid"))
 		{
 			gameController.LoseHeart();
@@ -98,7 +88,6 @@ public class Ship : MonoBehaviour {
 		Destroy(collision.gameObject);
 		GameObject explosionInstance = (GameObject)Instantiate (explosion, collision.contacts[0].point, Quaternion.identity);
 		Destroy (explosionInstance, 3f);
-//		Destroy (gameObject);
 	}
 
 }
