@@ -9,44 +9,38 @@ using System.Collections;
 
 public class TouchLogic : MonoBehaviour 
 {
-	public static int currTouch = 0;//so other scripts can know what touch is currently on screen
-	[HideInInspector]
-	public int touch2Watch = 64;
-	
-	public void CheckTouches()
-	{
+	//so other scripts can know what touch is currently on screen
+	public static int currTouch = 0;
+
+	public void CheckTouches() {
 		//is there a touch on screen?
-		if(Input.touches.Length <= 0)
-		{
+		if(Input.touches.Length <= 0) {
 			OnNoTouches();
-		}
-		else //if there is a touch
-		{
-			//loop through all the the touches on screen
-			for(int i = 0; i < Input.touchCount; i++)
-			{
-				currTouch = i;
+		} else {
+			// If there is a touch, loop through all the the touches on screen.
+			foreach(Touch touch in Input.touches) {
+				currTouch = touch.fingerId;
 				//executes this code for current touch (i) on screen
-				if(this.guiTexture != null && (this.guiTexture.HitTest(Input.GetTouch(i).position)))
-				{
+				if(this.guiTexture != null && (this.guiTexture.HitTest(touch.position))) {
 					//if current touch hits our guitexture, run this code
-					if(Input.GetTouch(i).phase == TouchPhase.Began)
-					{
+					switch(touch.phase) {
+					case TouchPhase.Began:
 						OnTouchBegan();
-					}
-					if(Input.GetTouch(i).phase == TouchPhase.Ended)
-					{
+						break;
+					case TouchPhase.Ended:
 						OnTouchEnded();
-					}
-					if(Input.GetTouch(i).phase == TouchPhase.Moved)
-					{
+						break;
+					case TouchPhase.Moved:
 						OnTouchMoved();
+						break;
+					case TouchPhase.Stationary:
+						OnTouchStayed();
+						break;
 					}
 				}
 				
 				//outside so it doesn't require the touch to be over the guitexture
-				switch(Input.GetTouch(i).phase)
-				{
+				switch(touch.phase) {
 				case TouchPhase.Began:
 					OnTouchBeganAnywhere();
 					break;
@@ -69,6 +63,7 @@ public class TouchLogic : MonoBehaviour
 	public virtual void OnTouchBegan(){}
 	public virtual void OnTouchEnded(){}
 	public virtual void OnTouchMoved(){}
+	public virtual void OnTouchStayed(){}
 	public virtual void OnTouchBeganAnywhere(){}
 	public virtual void OnTouchEndedAnywhere(){}
 	public virtual void OnTouchMovedAnywhere(){}
