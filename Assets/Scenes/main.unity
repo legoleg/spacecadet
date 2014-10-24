@@ -3576,12 +3576,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTexture: {fileID: 2800000, guid: 880b47af6be814793ad212cddbf6e03a, type: 3}
   tempo: .666000009
-  lives: 3
   hearts:
   - {fileID: 1811815886}
   - {fileID: 1708995183}
   - {fileID: 667993774}
-  points: 0
   buttonLeft: {fileID: 664932820}
   buttonRight: {fileID: 72589000}
   pointsTxt: {fileID: 812801725}
