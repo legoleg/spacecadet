@@ -8,11 +8,13 @@ public class SwipeInput : MonoBehaviour {
 
 	Ship ship;
 
-	void Start () {
+	void Start ()
+	{
 		ship = GameObject.FindGameObjectWithTag ("Player").GetComponent<Ship> ();
 	}
 	
-	void Update() {
+	void Update()
+	{
 		if (Input.touchCount > 0) {
 			Touch touch = Input.touches[0];
 			
