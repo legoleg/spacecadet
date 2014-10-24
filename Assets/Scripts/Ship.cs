@@ -23,18 +23,13 @@ public class Ship : MonoBehaviour {
 		spawnController = GameObject.Find ("SpawnController").GetComponent<SpawnController> ();
 		spawns = spawnController.spawns;
 		tempo = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().tempo;
-		//TODO try timing the shot in another way than coroutines
-		StartCoroutine(Shoot());
 	}
 
-	IEnumerator Shoot () {
+	void Shoot () {
 		if (canShoot) {
 			GameObject bulletInstance = (GameObject)Instantiate (bullet, bulletSpawnTransform.position, Quaternion.identity);
 			bulletInstance.rigidbody2D.AddForce(Vector2.up * bulletSpeed, ForceMode2D.Force);
 		}
-
-		yield return new WaitForSeconds (tempo);
-		StartCoroutine(Shoot());
 	}
 
 	void Update () {
@@ -69,9 +64,11 @@ public class Ship : MonoBehaviour {
 	void Move () {
 		if (canMove) {
 			iTween.MoveTo (this.gameObject, iTween.Hash (
-				"position", new Vector3 (spawns [currPos].transform.position.x, transform.position.y, transform.position.z), 
-				"easetype", iTween.EaseType.spring, 
-				"time", .4f
+				"position", new Vector3 (spawns [currPos].transform.position.x, transform.position.y, transform.position.z)
+				,"easetype", iTween.EaseType.spring
+				,"time", tempo
+				,"onstart", "Shoot"
+				,"onstarttarget", gameObject
 				));
 		}
 	}

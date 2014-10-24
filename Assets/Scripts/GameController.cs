@@ -16,13 +16,14 @@ public class GameController : MonoBehaviour
 	public Button buttonLeft;
 	public Button buttonRight;
 	public Text pointsTxt;
-	public Text multiplierTxt;
+	public Text pointsTxtCentered;
+
 	// Music
 	public AudioClip inGameMusic;
 	public AudioClip pauseMusic;
 	Music music;
 
-	float fadingTime;
+	float fadeOutTime = 8f;
 	float hitTime;
 		
 
@@ -32,9 +33,9 @@ public class GameController : MonoBehaviour
 
 		points = 0;
 		Time.timeScale = 1f;
-		fadingTime = tempo * 3 - .1f;
+		fadeOutTime = fadeOutTime * tempo - .1f;
 
-		var fadeTime  = tempo * 2 - .1f;
+		var fadeInTime  = tempo;
 
 		// disable UI elements that slide in on the screen
 		pointsTxt.enabled = false;
@@ -44,7 +45,7 @@ public class GameController : MonoBehaviour
 		foreach (Image heart in hearts) {
 			heart.enabled = false;
 		}
-		StartCoroutine(FadeIn(fadeTime));
+		StartCoroutine(FadeIn(fadeInTime));
 		
 		// fade in music 
 		music.gameObject.audio.clip = inGameMusic;
@@ -68,39 +69,22 @@ public class GameController : MonoBehaviour
 		yield return new WaitForSeconds (fadeTime);
 		iTween.CameraFadeDestroy();
 
-		// tween heart from invisible to visible positions
+		// Tween the hearts from invisible to visible positions
 		foreach (Image heart in hearts) {
-			yield return new WaitForSeconds (.1f);
 			heart.enabled = true;
 			iTween.MoveFrom(heart.gameObject, iTween.Hash(
-				"y", -50f
+				"x", 512f
 				, "time", tempo
 				, "easetype", iTween.EaseType.easeOutBack
 				));
+			yield return new WaitForSeconds (.1f);
 		}
 
 		// Point text slides in
 		yield return new WaitForSeconds (.1f);
 		pointsTxt.enabled = true;
 		iTween.MoveFrom(pointsTxt.gameObject, iTween.Hash(
-			"x", Screen.width
-			, "time", tempo
-			, "easetype", iTween.EaseType.easeOutBack
-			));
-
-		// Left and Right Buttons slides in
-		yield return new WaitForSeconds (.1f);
-
-		buttonLeft.image.enabled = true;
-		iTween.MoveFrom(buttonLeft.gameObject, iTween.Hash(
-			"x", -96
-			, "time", tempo
-			, "easetype", iTween.EaseType.easeOutBack
-			));
-
-		buttonRight.image.enabled = true;
-		iTween.MoveFrom(buttonRight.gameObject, iTween.Hash(
-			"x", 96+Screen.width
+			"x", -32
 			, "time", tempo
 			, "easetype", iTween.EaseType.easeOutBack
 			));
@@ -109,38 +93,27 @@ public class GameController : MonoBehaviour
 		Ship.canShoot = true;
 	}
 
-	public void AddPoints (int i) {
+	public void AddPoints (int i)
+	{
 		StartCoroutine(PointRoutine (i));
-
 	}
 
 	IEnumerator PointRoutine (int i)
 	{
-		// Set the time that points was added and give an award two targets are hit at the same time
-		if (Time.time - hitTime <= tempo) {
-			Debug.Log ((Time.time - hitTime).ToString () + " <=" + tempo.ToString ());
-			// Why 160? https://twitter.com/_legoleg/status/519207539603681280 @korumellis digs it on Mars One?
-			points += 160;
-			TweenGameObject (pointsTxt.gameObject, 50f, tempo * 2);
-			iTween.MoveBy (multiplierTxt.gameObject, iTween.Hash ("easetype", iTween.EaseType.easeInOutExpo, "y", -350, "time", 4f));
-			yield return new WaitForSeconds (.5f);
-			iTween.MoveBy (multiplierTxt.gameObject, iTween.Hash ("easetype", iTween.EaseType.easeInOutExpo, "y", 350, "time", 4f));
-		}
-		else {
-			points += i;
-			TweenGameObject (pointsTxt.gameObject, 25f, tempo);
-		}
+		points += i;
+		TweenGameObject (pointsTxt.gameObject, 25f, tempo);
 		yield return new WaitForSeconds (.5f);
 		hitTime = Time.time;
 	}
 
-	public void LoseHeart () {
+	public void LoseHeart ()
+	{
 		lives--;
 
 		for (int i = 0; i < hearts.Length; i++) {
 			if (i >= lives) {
 				iTween.MoveTo(hearts[i].gameObject, iTween.Hash(
-					"y", -50
+					"x", 512
 					, "time", tempo
 					, "easetype", iTween.EaseType.easeInBack
 					));
@@ -152,11 +125,8 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-	void AnimateMultilpierText (float timeFactor) {
-		multiplierTxt.rectTransform.anchoredPosition = new Vector2(multiplierTxt.rectTransform.anchoredPosition.x, timeFactor);
-	}
-
-	public void Lose () {
+	public void Lose ()
+	{
 		Ship.canShoot = false;
 		Ship.canMove = false;
 
@@ -167,7 +137,7 @@ public class GameController : MonoBehaviour
 		iTween.ValueTo (gameObject, iTween.Hash (
 			"from", 1f
 			,"to", 0f
-			,"time", fadingTime
+			,"time", fadeOutTime
 			,"easetype", iTween.EaseType.easeInOutSine
 			,"ignoretimescale", true
 			,"onupdatetarget", gameObject
@@ -198,7 +168,13 @@ public class GameController : MonoBehaviour
 
 		// Point text slides in
 		yield return new WaitForSeconds (.1f);
-		iTween.MoveTo(pointsTxt.gameObject, iTween.Hash(
+		pointsTxt.gameObject.SetActive(false);
+		pointsTxtCentered.gameObject.SetActive(true);
+		// Displaying the points with the specified thousand-separator. Thanks to http://stackoverflow.com/a/752167/229507
+		NumberFormatInfo numberFormatInfo = (NumberFormatInfo) CultureInfo.InvariantCulture.NumberFormat.Clone();
+		numberFormatInfo.NumberGroupSeparator = " ";
+		pointsTxtCentered.text = System.Convert.ToInt32(points).ToString("N0", numberFormatInfo);
+		iTween.MoveTo(pointsTxtCentered.gameObject, iTween.Hash(
 			"y", Screen.height/2
 			, "time", tempo
 			, "easetype", iTween.EaseType.easeOutBack
@@ -211,9 +187,9 @@ public class GameController : MonoBehaviour
 		iTween.CameraFadeAdd(cameraTexture);
 		iTween.CameraFadeTo(iTween.Hash (
 			"amount", 1f, 
-			"time", fadingTime, 
+			"time", fadeOutTime, 
 			"ignoretimescale", true));
-		yield return new WaitForSeconds (fadingTime);
+		yield return new WaitForSeconds (fadeOutTime);
 		iTween.CameraFadeDestroy();
 	}
 	
