@@ -29,6 +29,10 @@ public class Ship : MonoBehaviour {
 		if (canShoot) {
 			GameObject bulletInstance = (GameObject)Instantiate (bullet, bulletSpawnTransform.position, Quaternion.identity);
 			bulletInstance.rigidbody2D.AddForce(Vector2.up * bulletSpeed, ForceMode2D.Force);
+		
+			if (SpawnController.canSpawn == false) {
+				SpawnController.canSpawn = true;
+			}
 		}
 	}
 

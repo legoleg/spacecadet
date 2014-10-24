@@ -24,7 +24,6 @@ public class GameController : MonoBehaviour
 	Music music;
 
 	float fadeOutTime = 8f;
-	float hitTime;
 		
 
 	void Start ()
@@ -103,7 +102,6 @@ public class GameController : MonoBehaviour
 		points += i;
 		TweenGameObject (pointsTxt.gameObject, 25f, tempo);
 		yield return new WaitForSeconds (.5f);
-		hitTime = Time.time;
 	}
 
 	public void LoseHeart ()
