@@ -34,6 +34,8 @@ public class SwipeInput : MonoBehaviour {
 					else if (swipeValue < 0) {
 						ship.MoveLeft();
 					}
+					// Reset the startPos to make a new measurement
+					startPos = touch.position;
 				}
 				break;
 			}
