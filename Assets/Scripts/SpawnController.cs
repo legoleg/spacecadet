@@ -10,6 +10,7 @@ public class SpawnController : MonoBehaviour
 
 	void Start ()
 	{
+		canSpawn = false;
 		spawnRate = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().tempo;
 
 		if (objectsToSpawn.Length < 1 || spawns.Length < 1) {
