@@ -115,12 +115,19 @@ public class GameController : MonoBehaviour
 					, "time", tempo
 					, "easetype", iTween.EaseType.easeInBack
 					));
+				StartCoroutine(DeactivateGameObjectAfterSeconds (hearts[i].gameObject, tempo));
 			}
 		}
 
 		if (lives <= 0) {
 			Lose ();
 		}
+	}
+
+	IEnumerator DeactivateGameObjectAfterSeconds (GameObject gameObject, float seconds)
+	{
+		yield return new WaitForSeconds (seconds);
+		gameObject.SetActive (false);
 	}
 
 	public void Lose ()
