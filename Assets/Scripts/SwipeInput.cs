@@ -2,8 +2,7 @@
 using System.Collections;
 
 public class SwipeInput : MonoBehaviour {
-	public float minSwipeDistY;
-	public float minSwipeDistX;
+	float minSwipeDistX;
 	private Vector2 startPos;
 
 	Ship ship;
@@ -11,6 +10,7 @@ public class SwipeInput : MonoBehaviour {
 	void Start ()
 	{
 		ship = GameObject.FindGameObjectWithTag ("Player").GetComponent<Ship> ();
+		minSwipeDistX = Screen.width * .2f;
 	}
 	
 	void Update()
@@ -22,7 +22,7 @@ public class SwipeInput : MonoBehaviour {
 			case TouchPhase.Began:
 				startPos = touch.position;
 				break;
-			case TouchPhase.Ended:
+			case TouchPhase.Moved:
 				float swipeDistHorizontal = (new Vector3(touch.position.x,0, 0) - new Vector3(startPos.x, 0, 0)).magnitude;
 				if (swipeDistHorizontal > minSwipeDistX) {
 					float swipeValue = Mathf.Sign(touch.position.x - startPos.x);
@@ -34,6 +34,8 @@ public class SwipeInput : MonoBehaviour {
 					else if (swipeValue < 0) {
 						ship.MoveLeft();
 					}
+					// Reset the startPos to make a new measurement
+					startPos = touch.position;
 				}
 				break;
 			}
