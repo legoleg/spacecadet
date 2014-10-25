@@ -72,7 +72,7 @@ public class GameController : MonoBehaviour
 		foreach (Image heart in hearts) {
 			heart.enabled = true;
 			iTween.MoveFrom(heart.gameObject, iTween.Hash(
-				"x", Screen.width + 32
+				"x", Screen.width + Screen.width * 0.2f
 				, "time", tempo
 				, "easetype", iTween.EaseType.easeOutBack
 				));
@@ -111,7 +111,7 @@ public class GameController : MonoBehaviour
 		for (int i = 0; i < hearts.Length; i++) {
 			if (i >= lives) {
 				iTween.MoveTo(hearts[i].gameObject, iTween.Hash(
-					"x", Screen.width + 32
+					"x", Screen.width + Screen.width * 0.2f
 					, "time", tempo
 					, "easetype", iTween.EaseType.easeInBack
 					));
