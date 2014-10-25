@@ -10,6 +10,7 @@ public class SwipeInput : MonoBehaviour {
 	void Start ()
 	{
 		ship = GameObject.FindGameObjectWithTag ("Player").GetComponent<Ship> ();
+		minSwipeDistX = Screen.width * .2f;
 	}
 	
 	void Update()
