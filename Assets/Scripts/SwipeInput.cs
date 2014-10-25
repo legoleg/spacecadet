@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class SwipeInput : MonoBehaviour {
-	public float minSwipeDistX;
+	float minSwipeDistX;
 	private Vector2 startPos;
 
 	Ship ship;
