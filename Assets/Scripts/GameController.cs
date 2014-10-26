@@ -134,6 +134,7 @@ public class GameController : MonoBehaviour
 	{
 		Ship.canShoot = false;
 		Ship.canMove = false;
+		GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>().SetBool("Lost", true);
 
 		StartCoroutine (MoveUIToLosePosition());
 		StartCoroutine (FadeOut());
