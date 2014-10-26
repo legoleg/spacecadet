@@ -7,6 +7,8 @@ public class Ship : MonoBehaviour {
 	public GameObject bullet;
 	public int bulletForce = 300;
 
+	public AudioClip[] crashSounds;
+
 	[HideInInspector]
 	public bool canShoot = false;
 	[HideInInspector]
@@ -93,6 +95,9 @@ public class Ship : MonoBehaviour {
 	{
 		if (collision.gameObject.CompareTag("asteroid")) {
 			gameController.LoseHeart();
+			if (crashSounds.Length > 0) {
+				audio.PlayOneShot(crashSounds[Random.Range(0, crashSounds.Length)]);
+			}
 		}
 		
 		Destroy(collision.gameObject);
