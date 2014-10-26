@@ -1541,7 +1541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca11efd2014254d6fb0e1481c78ba503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 100000, guid: 0c527bc558f9c422fa68a891b5d4bf5d, type: 2}
+  explosion: {fileID: 100000, guid: f2879e572d98443488cd7be9552b5cc6, type: 2}
   bullet: {fileID: 100002, guid: 415c27ea1cc4f4e5cb4fbc0892bf28e2, type: 2}
   bulletSpeed: 200
   spawns: []
@@ -3508,8 +3508,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7dcbaf8851d04f15a648048d5b62581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSwipeDistY: 25
-  minSwipeDistX: 25
 --- !u!1 &1811815884
 GameObject:
   m_ObjectHideFlags: 0
