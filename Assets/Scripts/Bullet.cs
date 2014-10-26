@@ -4,17 +4,11 @@ using System.Collections;
 public class Bullet : MonoBehaviour
 {
 	public GameObject explosion;
-	public float bulletLifeTime = 2f;
 
 	GameController gameController;
 
 	void Start ()
 	{
-		Destroy (gameObject, bulletLifeTime);
-		ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem>();
-		foreach (var particleSystem in particleSystems) {
-			particleSystem.startLifetime = bulletLifeTime;
-		}
 		gameController = GameObject.FindWithTag ("GameController").GetComponent<GameController>();
 	}
 
