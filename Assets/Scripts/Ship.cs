@@ -5,32 +5,40 @@ public class Ship : MonoBehaviour {
 
 	public GameObject explosion;
 	public GameObject bullet;
-	public int bulletSpeed = 200;
-	public static bool canShoot = false;
-	public static bool canMove = false;
+	public int bulletForce = 300;
 
-	public GameObject[] spawns;
+	public AudioClip[] crashSounds;
 
-	float tempo;
-	Transform bulletSpawnTransform;
-	GameController gameController;
-	SpawnController spawnController;
-	int currPos = 1;
+	[HideInInspector]
+	public bool canShoot = false;
+	[HideInInspector]
+	public bool canMove = false;
+
+	private GameObject[] spawns;
+
+	private Transform bulletSpawnTransform;
+	private GameController gameController;
+	private float tempo;
+	private SpawnController spawnController;
+
+	private int currPos = 1;
 
 	void Start ()
 	{
 		bulletSpawnTransform = GameObject.Find ("BulletSpawnPoint").transform;
+
 		gameController = GameObject.Find ("GameController").GetComponent<GameController> ();
+		tempo = gameController.GetComponent<GameController>().tempo;
+
 		spawnController = GameObject.Find ("SpawnController").GetComponent<SpawnController> ();
 		spawns = spawnController.spawns;
-		tempo = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().tempo;
 	}
 
 	void Shoot ()
 	{
 		if (canShoot) {
 			GameObject bulletInstance = (GameObject)Instantiate (bullet, bulletSpawnTransform.position, Quaternion.identity);
-			bulletInstance.rigidbody2D.AddForce(Vector2.up * bulletSpeed, ForceMode2D.Force);
+			bulletInstance.rigidbody2D.AddForce(Vector2.up * bulletForce, ForceMode2D.Force);
 		
 			if (SpawnController.canSpawn == false) {
 				SpawnController.canSpawn = true;
@@ -87,6 +95,9 @@ public class Ship : MonoBehaviour {
 	{
 		if (collision.gameObject.CompareTag("asteroid")) {
 			gameController.LoseHeart();
+			if (crashSounds.Length > 0) {
+				audio.PlayOneShot(crashSounds[Random.Range(0, crashSounds.Length)]);
+			}
 		}
 		
 		Destroy(collision.gameObject);

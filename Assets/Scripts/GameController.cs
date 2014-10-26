@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
 	public Texture2D cameraTexture;
 	// set this to match the BMP of the music: 0.5 = 4/4 or 120 bpm, 2/4 or 1 = 60 bpm, 2 = 1/4 or 30 bpm, 0.66667 = 3/4
 	public float tempo = .66667f;
-	int lives = 3;
+	private int lives = 3;
 	public Image[] hearts;
 	public static int points = 0;
 	// UI
@@ -21,7 +21,8 @@ public class GameController : MonoBehaviour
 	// Music
 	public AudioClip inGameMusic;
 	public AudioClip pauseMusic;
-	Music music;
+	private Music music;
+	private Ship ship;
 
 	float fadeOutTime = 8f;
 		
@@ -29,7 +30,7 @@ public class GameController : MonoBehaviour
 	void Start ()
 	{
 		music = GameObject.Find ("Music").GetComponent<Music>();
-
+		ship = GameObject.Find ("Ship").GetComponent<Ship>();
 		points = 0;
 		Time.timeScale = 1f;
 		fadeOutTime = fadeOutTime * tempo - .1f;
@@ -88,8 +89,8 @@ public class GameController : MonoBehaviour
 			, "easetype", iTween.EaseType.easeOutBack
 			));
 
-		Ship.canMove = true;
-		Ship.canShoot = true;
+		ship.canMove = true;
+		ship.canShoot = true;
 	}
 
 	public void AddPoints (int i)
@@ -100,13 +101,20 @@ public class GameController : MonoBehaviour
 	IEnumerator PointRoutine (int i)
 	{
 		points += i;
-		TweenGameObject (pointsTxt.gameObject, 25f, tempo);
+		iTween.PunchPosition (pointsTxt.gameObject, iTween.Hash (
+			"easetype", iTween.EaseType.easeInOutBack
+			,"y", 25f
+			,"time", tempo
+			));
 		yield return new WaitForSeconds (.5f);
 	}
 
 	public void LoseHeart ()
 	{
 		lives--;
+		if (lives <= 0) {
+			Lose ();
+		}
 
 		for (int i = 0; i < hearts.Length; i++) {
 			if (i >= lives) {
@@ -118,10 +126,6 @@ public class GameController : MonoBehaviour
 				StartCoroutine(DeactivateGameObjectAfterSeconds (hearts[i].gameObject, tempo));
 			}
 		}
-
-		if (lives <= 0) {
-			Lose ();
-		}
 	}
 
 	IEnumerator DeactivateGameObjectAfterSeconds (GameObject gameObject, float seconds)
@@ -132,8 +136,9 @@ public class GameController : MonoBehaviour
 
 	public void Lose ()
 	{
-		Ship.canShoot = false;
-		Ship.canMove = false;
+		ship.canShoot = false;
+		ship.canMove = false;
+		ship.GetComponentInChildren<Animator>().SetBool("Lost", true);
 
 		StartCoroutine (MoveUIToLosePosition());
 		StartCoroutine (FadeOut());
@@ -154,37 +159,21 @@ public class GameController : MonoBehaviour
 
 	IEnumerator MoveUIToLosePosition ()
 	{
-		// Left and Right Buttons slides in
-		yield return new WaitForSeconds (.1f);
-		
-		iTween.MoveTo(buttonLeft.gameObject, iTween.Hash(
-			"x", -96
-			, "time", tempo
-			, "easetype", iTween.EaseType.easeOutBack
-			));
-		buttonLeft.image.enabled = false;
-		
-		iTween.MoveTo(buttonRight.gameObject, iTween.Hash(
-			"x", 96+Screen.width
-			, "time", tempo
-			, "easetype", iTween.EaseType.easeOutBack
-			));
-		buttonRight.image.enabled = false;
-
 		// Point text slides in
 		yield return new WaitForSeconds (.1f);
 		pointsTxt.gameObject.SetActive(false);
 		pointsTxtCentered.gameObject.SetActive(true);
+
 		// Displaying the points with the specified thousand-separator. Thanks to http://stackoverflow.com/a/752167/229507
 		NumberFormatInfo numberFormatInfo = (NumberFormatInfo) CultureInfo.InvariantCulture.NumberFormat.Clone();
 		numberFormatInfo.NumberGroupSeparator = " ";
 		pointsTxtCentered.text = System.Convert.ToInt32(points).ToString("N0", numberFormatInfo);
-		iTween.MoveTo(pointsTxtCentered.gameObject, iTween.Hash(
-			"y", Screen.height/2
-			, "time", tempo
-			, "easetype", iTween.EaseType.easeOutBack
-			));
 
+		iTween.MoveTo(pointsTxtCentered.gameObject, iTween.Hash(
+			"y", Screen.height * .5f
+			,"time", tempo
+			,"easetype", iTween.EaseType.easeOutBack
+			));
 	}
 	
 	IEnumerator FadeOut ()
@@ -204,18 +193,9 @@ public class GameController : MonoBehaviour
 		music.audio.pitch = timeFactor;
 	}
 	
-	public void Restart ()
+	void Restart ()
 	{
 		Time.timeScale = 1f;
 		Application.LoadLevel("menu");
-	}
-	
-	public void TweenGameObject (GameObject obj, float amount, float time)
-	{
-		iTween.PunchPosition (obj, iTween.Hash (
-			"easetype", iTween.EaseType.easeInOutBack
-			,"y", amount
-			,"time", time
-			));
 	}
 }
