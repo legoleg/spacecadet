@@ -96,7 +96,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: dc20fca7c7e5148fbba2e11dcbae29f7, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: .5
   m_Pitch: 1
   Loop: 0
@@ -157,7 +157,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 100000, guid: 0c527bc558f9c422fa68a891b5d4bf5d, type: 2}
-  bulletLifeTime: 2
+  bulletSounds:
+  - {fileID: 8300000, guid: dc20fca7c7e5148fbba2e11dcbae29f7, type: 3}
+  - {fileID: 8300000, guid: 0a47c394c2527497a867f5e64cb2cf39, type: 3}
+  - {fileID: 8300000, guid: 214b11ac7d2634ed1b6d5393a987a58e, type: 3}
+  - {fileID: 8300000, guid: 9376475bf3869427596fe2e4506d49e9, type: 3}
+  rewardSounds:
+  - {fileID: 8300000, guid: 7366a398d04d54f88bbe724e0ab7ff80, type: 3}
+  - {fileID: 8300000, guid: 821bc65ae329c432d9c332cfa5e941e0, type: 3}
+  - {fileID: 8300000, guid: a231502752e074dcc9bb0da444cb749a, type: 3}
+  - {fileID: 8300000, guid: b16cc01cb5f00417bbcd4ff75e603c51, type: 3}
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1
