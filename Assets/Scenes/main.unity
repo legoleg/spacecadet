@@ -1580,7 +1580,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 547197295}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.52750015, z: 0}
+  m_LocalPosition: {x: 0, y: 6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1976372475}
@@ -1884,9 +1884,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 58101207}
   m_RootOrder: 3
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 64, y: 128}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 64, y: 0}
   m_SizeDelta: {x: -192, y: 128}
   m_Pivot: {x: .5, y: 1}
 --- !u!114 &812801725
@@ -3385,12 +3385,13 @@ MonoBehaviour:
   - {fileID: 1811815886}
   - {fileID: 1708995183}
   - {fileID: 667993774}
-  buttonLeft: {fileID: 0}
-  buttonRight: {fileID: 0}
   pointsTxt: {fileID: 812801725}
   pointsTxtCentered: {fileID: 251573181}
   inGameMusic: {fileID: 8300000, guid: 0ecf3bfcdba1945a2b9ea5e0b17f15d3, type: 3}
   pauseMusic: {fileID: 8300000, guid: c48f47d87f8904084bcc4167894c7255, type: 3}
+  music: {fileID: 619917396}
+  killZone: {fileID: 185454245}
+  ship: {fileID: 408649661}
 --- !u!4 &1810588101
 Transform:
   m_ObjectHideFlags: 0

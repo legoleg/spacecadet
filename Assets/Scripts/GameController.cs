@@ -6,51 +6,58 @@ using System.Globalization;
 
 public class GameController : MonoBehaviour
 {
+	// This is for fading in
 	public Texture2D cameraTexture;
+
 	// set this to match the BMP of the music: 0.5 = 4/4 or 120 bpm, 2/4 or 1 = 60 bpm, 2 = 1/4 or 30 bpm, 0.66667 = 3/4
 	public float tempo = 1f;
 	private int lives = 3;
 	public Image[] hearts;
 	public static int points = 0;
+
 	// UI
-	public Button buttonLeft;
-	public Button buttonRight;
 	public Text pointsTxt;
 	public Text pointsTxtCentered;
 
 	// Music
 	public AudioClip inGameMusic;
 	public AudioClip pauseMusic;
-	private Music music;
-	private Ship ship;
+	private Music musicComponent;
+	private Ship shipComponent;
+
+	public GameObject music;
+	public GameObject killZone;
+	public GameObject ship;
 
 	float fadeOutTime = 8f;
 		
 
 	void Start ()
 	{
-		music = GameObject.Find ("Music").GetComponent<Music>();
-		ship = GameObject.Find ("Ship").GetComponent<Ship>();
+		// Initialise music
+		musicComponent = music.GetComponent<Music>();
+		// fade in music 
+		musicComponent.gameObject.audio.clip = inGameMusic;
+		musicComponent.FadeIn (tempo * 4);
+		musicComponent.audio.Play ();
+
+		// Initialise ship
+		shipComponent = ship.GetComponent<Ship>();
+		shipComponent.canMove = true;
+
 		points = 0;
+
 		Time.timeScale = 1f;
 		fadeOutTime = fadeOutTime * tempo - .1f;
-
 		var fadeInTime  = tempo;
+		StartCoroutine(FadeIn(fadeInTime));
 
 		// disable UI elements that slide in on the screen
-		pointsTxt.enabled = false;
+//		pointsTxt.enabled = false;
 
 		foreach (Image heart in hearts) {
 			heart.enabled = false;
 		}
-		StartCoroutine(FadeIn(fadeInTime));
-		
-		// fade in music 
-		music.gameObject.audio.clip = inGameMusic;
-		music.FadeIn (tempo * 4);
-		music.audio.Play ();
-
-		ship.canMove = true;
 	}
 
 	void Update ()
@@ -133,9 +140,12 @@ public class GameController : MonoBehaviour
 
 	public void Lose ()
 	{
-		ship.canShoot = false;
-		ship.canMove = false;
-		ship.GetComponentInChildren<Animator>().SetBool("Lost", true);
+		shipComponent.canShoot = false;
+		shipComponent.canMove = false;
+		shipComponent.GetComponentInChildren<Animator>().SetBool("Lost", true);
+		ship.collider2D.enabled = false;
+		ship.GetComponent<FollowFinger>().enabled = false;
+		killZone.SetActive(false);
 
 		StartCoroutine (MoveUIToLosePosition());
 		StartCoroutine (FadeOut());
@@ -187,7 +197,7 @@ public class GameController : MonoBehaviour
 	void ScaleTime (float timeFactor)
 	{
 		Time.timeScale = timeFactor;
-		music.audio.pitch = timeFactor;
+		musicComponent.audio.pitch = timeFactor;
 	}
 	
 	void Restart ()
