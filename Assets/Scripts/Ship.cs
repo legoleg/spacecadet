@@ -63,7 +63,7 @@ public class Ship : MonoBehaviour {
 	{
 		if (currentTrack > 0) {
 			currentTrack--;
-			ApplyMove ();
+			ApplyMove (currentTrack);
 		}
 	}
 	
@@ -71,15 +71,15 @@ public class Ship : MonoBehaviour {
 	{
 		if (currentTrack < tracks.Length-1) {
 			currentTrack++;
-			ApplyMove ();
+			ApplyMove (currentTrack);
 		}
 	}
-	
-	void ApplyMove ()
+
+	public void ApplyMove (int track)
 	{
 		if (canMove) {
 			iTween.MoveTo (this.gameObject, iTween.Hash (
-				"position", new Vector3 (tracks [currentTrack].transform.position.x, transform.position.y, transform.position.z)
+				"position", new Vector3 (tracks [track].transform.position.x, transform.position.y, transform.position.z)
 				,"easetype", iTween.EaseType.spring
 				,"time", tempo
 				,"onstart", "Shoot"
