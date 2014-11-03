@@ -9,14 +9,14 @@ public class Ship : MonoBehaviour {
 
 	public AudioClip[] crashSounds;
 
-	public bool canShoot = true;
+	public bool canShoot = false;
 	public bool canMove = true;
 
 	private GameObject[] tracks;
 
 	private Transform bulletSpawnTransform;
 	private GameController gameController;
-	private float tempo;
+	private float movementTempo;
 	private SpawnController spawnController;
 
 	private int currentTrack = 1;
@@ -26,13 +26,13 @@ public class Ship : MonoBehaviour {
 		bulletSpawnTransform = GameObject.Find ("BulletSpawnPoint").transform;
 
 		gameController = GameObject.Find ("GameController").GetComponent<GameController> ();
-		tempo = gameController.GetComponent<GameController>().tempo;
+		movementTempo = gameController.GetComponent<GameController>().tempo;
 
 		spawnController = GameObject.Find ("SpawnController").GetComponent<SpawnController> ();
 		tracks = spawnController.spawns;
 	}
 
-	void Shoot ()
+	public void Shoot ()
 	{
 		if (canShoot) {
 			GameObject bulletInstance = (GameObject)Instantiate (bullet, bulletSpawnTransform.position, Quaternion.identity);
@@ -49,39 +49,31 @@ public class Ship : MonoBehaviour {
 #if UNITY_EDITOR
 		// get input from keyboard
 		if (Input.GetKeyDown("left")) {
-			MoveLeft();
+			if (currentTrack > 0) {
+				currentTrack--;
+				ApplyMove (currentTrack);
+			}
 		}	
 		else if (Input.GetKeyDown("right")) {
-			MoveRight();
+			if (currentTrack < tracks.Length-1) {
+				currentTrack++;
+				ApplyMove (currentTrack);
+			}
 		}
 #endif
-	}
-	
-	public void MoveLeft ()
-	{
-		if (currentTrack > 0) {
-			currentTrack--;
-			ApplyMove (currentTrack);
-		}
-	}
-	
-	public void MoveRight ()
-	{
-		if (currentTrack < tracks.Length-1) {
-			currentTrack++;
-			ApplyMove (currentTrack);
-		}
 	}
 
 	public void ApplyMove (int track)
 	{
+		if (!canShoot) {
+			canShoot = true;
+		}
+
 		if (canMove) {
 			iTween.MoveTo (this.gameObject, iTween.Hash (
 				"position", new Vector3 (tracks [track].transform.position.x, transform.position.y, transform.position.z)
 				,"easetype", iTween.EaseType.spring
-				,"time", tempo
-				,"onstart", "Shoot"
-				,"onstarttarget", gameObject
+				,"time", movementTempo
 				));
 		}
 	}

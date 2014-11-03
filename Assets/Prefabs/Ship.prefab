@@ -44,6 +44,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 60: {fileID: 6000000}
   - 82: {fileID: 8200000}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Player
@@ -275,6 +276,17 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d272082ec748b4ac8b8b0d9441e9be3d, type: 3}
   canShoot: 1
   canMove: 1
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408c12aad7dd34772b0b5cf67c604eb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1

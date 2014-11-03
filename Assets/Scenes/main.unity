@@ -1513,6 +1513,7 @@ GameObject:
   - 114: {fileID: 408649663}
   - 60: {fileID: 408649664}
   - 82: {fileID: 408649665}
+  - 114: {fileID: 408649666}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Player
@@ -1554,7 +1555,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 649cce699aacc4c07810bdb33027d3ff, type: 3}
   - {fileID: 8300000, guid: a634e28110fc14dc9a3511c9e05f3992, type: 3}
   - {fileID: 8300000, guid: d272082ec748b4ac8b8b0d9441e9be3d, type: 3}
-  canShoot: 1
+  canShoot: 0
   canMove: 1
 --- !u!60 &408649664
 PolygonCollider2D:
@@ -1635,6 +1636,18 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!114 &408649666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: 8f49fa24fff7d432197177c411041091,
+    type: 2}
+  m_PrefabInternal: {fileID: 1985411672}
+  m_GameObject: {fileID: 408649661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408c12aad7dd34772b0b5cf67c604eb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &500266168
 GameObject:
   m_ObjectHideFlags: 0
@@ -2132,7 +2145,7 @@ MonoBehaviour:
     m_MaxSize: 48
     m_Alignment: 5
     m_RichText: 0
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 21 350
@@ -2152,6 +2165,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1098393813}
   - 95: {fileID: 1098393814}
+  - 114: {fileID: 1098393815}
   m_Layer: 0
   m_Name: Animation
   m_TagString: Untagged
@@ -2189,6 +2203,17 @@ Animator:
   m_ApplyRootMotion: 0
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &1098393815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1098393812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1dd9674f3f74b1c89cc0f96818d39a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1174596461
 GameObject:
   m_ObjectHideFlags: 0
@@ -3570,7 +3595,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1810588101}
   - 114: {fileID: 1810588100}
-  - 114: {fileID: 1810588103}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -3590,7 +3614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTexture: {fileID: 2800000, guid: 880b47af6be814793ad212cddbf6e03a, type: 3}
-  tempo: .666000009
+  tempo: 1
   hearts:
   - {fileID: 1811815886}
   - {fileID: 1708995183}
@@ -3613,17 +3637,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &1810588103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1810588099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 408c12aad7dd34772b0b5cf67c604eb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1811815884
 GameObject:
   m_ObjectHideFlags: 0
@@ -3767,6 +3780,10 @@ Prefab:
     - target: {fileID: 400008, guid: 8f49fa24fff7d432197177c411041091, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 8f49fa24fff7d432197177c411041091, type: 2}
+      propertyPath: canShoot
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8f49fa24fff7d432197177c411041091, type: 2}
