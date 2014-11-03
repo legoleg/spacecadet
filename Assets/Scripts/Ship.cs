@@ -5,14 +5,12 @@ public class Ship : MonoBehaviour {
 
 	public GameObject explosion;
 	public GameObject bullet;
-	public int bulletForce = 300;
+	public int bulletForce = 150;
 
 	public AudioClip[] crashSounds;
 
-	[HideInInspector]
-	public bool canShoot = false;
-	[HideInInspector]
-	public bool canMove = false;
+	public bool canShoot = true;
+	public bool canMove = true;
 
 	private GameObject[] tracks;
 

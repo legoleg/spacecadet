@@ -267,14 +267,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 100000, guid: f2879e572d98443488cd7be9552b5cc6, type: 2}
   bullet: {fileID: 100002, guid: 415c27ea1cc4f4e5cb4fbc0892bf28e2, type: 2}
-  bulletForce: 300
+  bulletForce: 150
   crashSounds:
   - {fileID: 8300000, guid: 3c67dffd265e04909bfcdd3a70f289d2, type: 3}
   - {fileID: 8300000, guid: 649cce699aacc4c07810bdb33027d3ff, type: 3}
   - {fileID: 8300000, guid: a634e28110fc14dc9a3511c9e05f3992, type: 3}
   - {fileID: 8300000, guid: d272082ec748b4ac8b8b0d9441e9be3d, type: 3}
-  canShoot: 0
-  canMove: 0
+  canShoot: 1
+  canMove: 1
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1
