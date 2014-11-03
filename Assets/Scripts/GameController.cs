@@ -39,8 +39,6 @@ public class GameController : MonoBehaviour
 
 		// disable UI elements that slide in on the screen
 		pointsTxt.enabled = false;
-		buttonLeft.image.enabled = false;
-		buttonRight.image.enabled = false;
 
 		foreach (Image heart in hearts) {
 			heart.enabled = false;
