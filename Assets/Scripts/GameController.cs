@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour
 {
 	public Texture2D cameraTexture;
 	// set this to match the BMP of the music: 0.5 = 4/4 or 120 bpm, 2/4 or 1 = 60 bpm, 2 = 1/4 or 30 bpm, 0.66667 = 3/4
-	public float tempo = .66667f;
+	public float tempo = 1f;
 	private int lives = 3;
 	public Image[] hearts;
 	public static int points = 0;
@@ -51,7 +51,6 @@ public class GameController : MonoBehaviour
 		music.audio.Play ();
 
 		ship.canMove = true;
-		ship.canShoot = true;
 	}
 
 	void Update ()
