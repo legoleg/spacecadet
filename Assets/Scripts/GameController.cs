@@ -39,8 +39,6 @@ public class GameController : MonoBehaviour
 
 		// disable UI elements that slide in on the screen
 		pointsTxt.enabled = false;
-		buttonLeft.image.enabled = false;
-		buttonRight.image.enabled = false;
 
 		foreach (Image heart in hearts) {
 			heart.enabled = false;
@@ -51,6 +49,9 @@ public class GameController : MonoBehaviour
 		music.gameObject.audio.clip = inGameMusic;
 		music.FadeIn (tempo * 4);
 		music.audio.Play ();
+
+		ship.canMove = true;
+		ship.canShoot = true;
 	}
 
 	void Update ()
@@ -88,9 +89,6 @@ public class GameController : MonoBehaviour
 			, "time", tempo
 			, "easetype", iTween.EaseType.easeOutBack
 			));
-
-		ship.canMove = true;
-		ship.canShoot = true;
 	}
 
 	public void AddPoints (int i)

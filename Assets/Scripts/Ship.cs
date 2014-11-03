@@ -5,23 +5,21 @@ public class Ship : MonoBehaviour {
 
 	public GameObject explosion;
 	public GameObject bullet;
-	public int bulletForce = 300;
+	public int bulletForce = 150;
 
 	public AudioClip[] crashSounds;
 
-	[HideInInspector]
-	public bool canShoot = false;
-	[HideInInspector]
-	public bool canMove = false;
+	public bool canShoot = true;
+	public bool canMove = true;
 
-	private GameObject[] spawns;
+	private GameObject[] tracks;
 
 	private Transform bulletSpawnTransform;
 	private GameController gameController;
 	private float tempo;
 	private SpawnController spawnController;
 
-	private int currPos = 1;
+	private int currentTrack = 1;
 
 	void Start ()
 	{
@@ -31,7 +29,7 @@ public class Ship : MonoBehaviour {
 		tempo = gameController.GetComponent<GameController>().tempo;
 
 		spawnController = GameObject.Find ("SpawnController").GetComponent<SpawnController> ();
-		spawns = spawnController.spawns;
+		tracks = spawnController.spawns;
 	}
 
 	void Shoot ()
@@ -61,28 +59,25 @@ public class Ship : MonoBehaviour {
 	
 	public void MoveLeft ()
 	{
-		//only move 
-		if (currPos > 0) {
-			currPos--;
-			//do the movement
-			Move ();
+		if (currentTrack > 0) {
+			currentTrack--;
+			ApplyMove (currentTrack);
 		}
 	}
 	
 	public void MoveRight ()
 	{
-		if (currPos < spawns.Length-1) {
-			currPos++;
-			//do the movement
-			Move ();
+		if (currentTrack < tracks.Length-1) {
+			currentTrack++;
+			ApplyMove (currentTrack);
 		}
 	}
-	
-	void Move ()
+
+	public void ApplyMove (int track)
 	{
 		if (canMove) {
 			iTween.MoveTo (this.gameObject, iTween.Hash (
-				"position", new Vector3 (spawns [currPos].transform.position.x, transform.position.y, transform.position.z)
+				"position", new Vector3 (tracks [track].transform.position.x, transform.position.y, transform.position.z)
 				,"easetype", iTween.EaseType.spring
 				,"time", tempo
 				,"onstart", "Shoot"
