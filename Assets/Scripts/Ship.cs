@@ -26,7 +26,8 @@ public class Ship : MonoBehaviour {
 		bulletSpawnTransform = GameObject.Find ("BulletSpawnPoint").transform;
 
 		gameController = GameObject.Find ("GameController").GetComponent<GameController> ();
-		movementTempo = gameController.GetComponent<GameController>().tempo;
+		var tempo = gameController.GetComponent<GameController>().tempo;
+		movementTempo = tempo/3;
 
 		spawnController = GameObject.Find ("SpawnController").GetComponent<SpawnController> ();
 		tracks = spawnController.spawns;
