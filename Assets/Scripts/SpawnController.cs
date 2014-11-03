@@ -11,7 +11,8 @@ public class SpawnController : MonoBehaviour
 	void Start ()
 	{
 		canSpawn = false;
-		spawnRate = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().tempo;
+		var tempo = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().tempo;
+		spawnRate = tempo;
 
 		if (objectsToSpawn.Length < 1 || spawns.Length < 1) {
 			Debug.LogError ("Assign some GameObjects to be spawned.");
@@ -21,6 +22,7 @@ public class SpawnController : MonoBehaviour
 	}
 
 	// TODO use this for the background as well
+	// TODO Spawn using animation events
 	IEnumerator SpawnRoutine ()
 	{
 		if (canSpawn) {
