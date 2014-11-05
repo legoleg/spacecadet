@@ -136,45 +136,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 36532727}
   m_HideIfInvisible: 0
---- !u!1 &202136364
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 202136366}
-  - 114: {fileID: 202136365}
-  m_Layer: 0
-  m_Name: GooglePlayGamesController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &202136365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 202136364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 367c02f17ff8743cc839b6211821dba1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &202136366
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 202136364}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
 --- !u!1 &371461323
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,7 +180,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 371461323}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0f59a86b476247369eda21274d3d87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 367c02f17ff8743cc839b6211821dba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &371461326
@@ -248,10 +209,10 @@ MonoBehaviour:
     m_ColorMultiplier: 2
     m_FadeDuration: .100000001
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300080, guid: c55f8ac3cc2f64c638ae4b7c6cb2d05e,
+    m_HighlightedSprite: {fileID: 21300000, guid: 8983df7f3e4fb4c0c809da3447d6c925,
       type: 3}
-    m_PressedSprite: {fileID: 21300084, guid: c55f8ac3cc2f64c638ae4b7c6cb2d05e, type: 3}
-    m_DisabledSprite: {fileID: 21300086, guid: c55f8ac3cc2f64c638ae4b7c6cb2d05e, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 8983df7f3e4fb4c0c809da3447d6c925, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 8983df7f3e4fb4c0c809da3447d6c925, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -263,7 +224,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 371461325}
-        m_MethodName: LoadNextScene
+        m_MethodName: SignIn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
