@@ -99,12 +99,13 @@ public class GameController : MonoBehaviour
 
 	public void AddPoints (int i)
 	{
-		StartCoroutine(PointRoutine (i));
+		points += i;
+		GameObject.Find("Stats").GetComponent<Stats>().SetScore(points);
+		StartCoroutine(PointAnimation());
 	}
 
-	IEnumerator PointRoutine (int i)
+	IEnumerator PointAnimation ()
 	{
-		points += i;
 		iTween.PunchPosition (pointsTxt.gameObject, iTween.Hash (
 			"easetype", iTween.EaseType.easeInOutBack
 			,"y", 25f
