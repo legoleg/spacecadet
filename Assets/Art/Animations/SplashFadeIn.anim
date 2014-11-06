@@ -44,9 +44,9 @@ AnimationClip:
         tangentMode: 10
       - time: 3
         value: 0
-        inSlope: .25
-        outSlope: .25
-        tangentMode: 10
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
       - time: 5
         value: 1
         inSlope: .5
@@ -126,9 +126,9 @@ AnimationClip:
         tangentMode: 10
       - time: 3
         value: 0
-        inSlope: .25
-        outSlope: .25
-        tangentMode: 10
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
       - time: 5
         value: 1
         inSlope: .5
