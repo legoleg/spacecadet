@@ -3380,7 +3380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTexture: {fileID: 2800000, guid: 880b47af6be814793ad212cddbf6e03a, type: 3}
-  tempo: 1
+  tempo: .666666687
   hearts:
   - {fileID: 1811815886}
   - {fileID: 1708995183}
@@ -3546,7 +3546,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 8f49fa24fff7d432197177c411041091, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 8f49fa24fff7d432197177c411041091, type: 2}
       propertyPath: canShoot

@@ -13,7 +13,6 @@ public class GameController : MonoBehaviour
 	public float tempo = 1f;
 	private int lives = 3;
 	public Image[] hearts;
-	public static int points = 0;
 
 	// UI
 	public Text pointsTxt;
@@ -45,7 +44,7 @@ public class GameController : MonoBehaviour
 		shipComponent = ship.GetComponent<Ship>();
 		shipComponent.canMove = true;
 
-		points = 0;
+		Stats.points = 0;
 
 		Time.timeScale = 1f;
 		fadeOutTime = fadeOutTime * tempo - .1f;
@@ -66,7 +65,7 @@ public class GameController : MonoBehaviour
 		NumberFormatInfo numberFormatInfo = (NumberFormatInfo) CultureInfo.InvariantCulture.NumberFormat.Clone();
 		numberFormatInfo.NumberGroupSeparator = " ";
 
-		pointsTxt.text = System.Convert.ToInt32(points).ToString("N0", numberFormatInfo);
+		pointsTxt.text = System.Convert.ToInt32(Stats.points).ToString("N0", numberFormatInfo);
 	}
 
 	IEnumerator FadeIn (float fadeTime)
@@ -99,8 +98,8 @@ public class GameController : MonoBehaviour
 
 	public void AddPoints (int i)
 	{
-		points += i;
-		GameObject.Find("Stats").GetComponent<Stats>().SetScore(points);
+		Stats.AddToPoints(i);
+		GameObject.Find("Stats").GetComponent<Stats>().SetScore(Stats.points);
 		StartCoroutine(PointAnimation());
 	}
 
@@ -175,7 +174,7 @@ public class GameController : MonoBehaviour
 		// Displaying the points with the specified thousand-separator. Thanks to http://stackoverflow.com/a/752167/229507
 		NumberFormatInfo numberFormatInfo = (NumberFormatInfo) CultureInfo.InvariantCulture.NumberFormat.Clone();
 		numberFormatInfo.NumberGroupSeparator = " ";
-		pointsTxtCentered.text = System.Convert.ToInt32(points).ToString("N0", numberFormatInfo);
+		pointsTxtCentered.text = System.Convert.ToInt32(Stats.points).ToString("N0", numberFormatInfo);
 
 		iTween.MoveTo(pointsTxtCentered.gameObject, iTween.Hash(
 			"y", Screen.height * .5f
