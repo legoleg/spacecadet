@@ -37,7 +37,7 @@ public class Ship : MonoBehaviour {
 	{
 		if (canShoot) {
 			GameObject bulletInstance = (GameObject)Instantiate (bullet, bulletSpawnTransform.position, Quaternion.identity);
-			bulletInstance.rigidbody2D.AddForce(Vector2.up * bulletForce, ForceMode2D.Force);
+			bulletInstance.GetComponent<Rigidbody2D>().AddForce(Vector2.up * bulletForce, ForceMode2D.Force);
 		
 			if (SpawnController.canSpawn == false) {
 				SpawnController.canSpawn = true;
@@ -84,7 +84,7 @@ public class Ship : MonoBehaviour {
 		if (collision.gameObject.CompareTag("asteroid")) {
 			gameController.LoseHeart();
 			if (crashSounds.Length > 0) {
-				audio.PlayOneShot(crashSounds[Random.Range(0, crashSounds.Length)]);
+				GetComponent<AudioSource>().PlayOneShot(crashSounds[Random.Range(0, crashSounds.Length)]);
 			}
 		}
 		

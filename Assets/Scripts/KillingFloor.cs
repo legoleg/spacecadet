@@ -9,9 +9,9 @@ public class KillingFloor : MonoBehaviour {
 	void Start ()
 	{
 		gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-		if (!audio) {
+		if (!GetComponent<AudioSource>()) {
 			gameObject.AddComponent<AudioSource>();
-			audio.volume = .75f;
+			GetComponent<AudioSource>().volume = .75f;
 		}
 	}
 
@@ -20,7 +20,7 @@ public class KillingFloor : MonoBehaviour {
 		if (other.gameObject.CompareTag("asteroid")) {
 			gameController.AddPoints(-1);
 			if (punishSounds.Length > 0) {
-				audio.PlayOneShot(punishSounds[Random.Range(0, punishSounds.Length)]);
+				GetComponent<AudioSource>().PlayOneShot(punishSounds[Random.Range(0, punishSounds.Length)]);
 			}
 		}
 		Destroy(other.gameObject);

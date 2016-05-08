@@ -22,29 +22,29 @@ public class ButtonController : MonoBehaviour {
 	{
 		backgroundColor = Camera.main.backgroundColor;
 		counter = GetComponent<Counter>();
-		audio.clip = secretClip;
+		GetComponent<AudioSource>().clip = secretClip;
 	}
 
 	void PlaySoundWithButton (bool isRandom)
 	{
 		if (isRandom)
 		{
-			if (Random.Range(0, 99) < 3 && !audio.isPlaying)
+			if (Random.Range(0, 99) < 3 && !GetComponent<AudioSource>().isPlaying)
 			{
-				audio.Play();
+				GetComponent<AudioSource>().Play();
 				StartCoroutine (BlinkBackgroundColor());
 				Debug.Log("Secret clip was chosen...");
 			}
 			else
 			{
-				Camera.main.audio.clip = audioClips [Random.Range (0, audioClips.Length)];
-				Debug.Log("Clip" + Camera.main.audio.clip.name + "was chosen...");
+				Camera.main.GetComponent<AudioSource>().clip = audioClips [Random.Range (0, audioClips.Length)];
+				Debug.Log("Clip" + Camera.main.GetComponent<AudioSource>().clip.name + "was chosen...");
 			}
-			Camera.main.audio.Play ();
+			Camera.main.GetComponent<AudioSource>().Play ();
 		}
 		else
 		{
-			Camera.main.audio.PlayOneShot (btnSound);
+			Camera.main.GetComponent<AudioSource>().PlayOneShot (btnSound);
 		}
 	}
 
@@ -66,7 +66,7 @@ public class ButtonController : MonoBehaviour {
 	{
 		Vector3 worldPoint = Camera.main.ScreenToWorldPoint(position);
 		Vector2 touchPoint = new Vector2(worldPoint.x, worldPoint.y);
-		if (collider2D != Physics2D.OverlapPoint(touchPoint))
+		if (GetComponent<Collider2D>() != Physics2D.OverlapPoint(touchPoint))
 		{
 			ChangeButtonSpriteTo (btnDown);
 			PlaySoundWithButton (false);
@@ -78,13 +78,13 @@ public class ButtonController : MonoBehaviour {
 	{
 		Vector3 worldPoint = Camera.main.ScreenToWorldPoint(position);
 		Vector2 touchPoint = new Vector2(worldPoint.x, worldPoint.y);
-		if (collider2D != Physics2D.OverlapPoint(touchPoint))
+		if (GetComponent<Collider2D>() != Physics2D.OverlapPoint(touchPoint))
 		{
 			ChangeButtonSpriteTo (btnUp);
 			PlaySoundWithButton (true);
 			StopAllCoroutines ();
 			GameObject p = (GameObject)Instantiate (particle, transform.position, Quaternion.identity);
-			p.particleSystem.startColor = Camera.main.backgroundColor;
+			p.GetComponent<ParticleSystem>().startColor = Camera.main.backgroundColor;
 			Destroy (p, 3f);
 			Camera.main.backgroundColor = backgroundColor;
 			counter.AddOne();
