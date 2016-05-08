@@ -37,9 +37,9 @@ public class GameController : MonoBehaviour
 		// Initialise music
 		musicComponent = music.GetComponent<Music>();
 		// fade in music 
-		musicComponent.gameObject.audio.clip = inGameMusic;
+		musicComponent.gameObject.GetComponent<AudioSource>().clip = inGameMusic;
 		musicComponent.FadeIn (tempo * 4);
-		musicComponent.audio.Play ();
+		musicComponent.GetComponent<AudioSource>().Play ();
 
 		// Initialise ship
 		shipComponent = ship.GetComponent<Ship>();
@@ -143,7 +143,7 @@ public class GameController : MonoBehaviour
 		shipComponent.canShoot = false;
 		shipComponent.canMove = false;
 		shipComponent.GetComponentInChildren<Animator>().SetBool("Lost", true);
-		ship.collider2D.enabled = false;
+		ship.GetComponent<Collider2D>().enabled = false;
 		ship.GetComponent<FollowFinger>().enabled = false;
 		killZone.SetActive(false);
 
@@ -197,7 +197,7 @@ public class GameController : MonoBehaviour
 	void ScaleTime (float timeFactor)
 	{
 		Time.timeScale = timeFactor;
-		musicComponent.audio.pitch = timeFactor;
+		musicComponent.GetComponent<AudioSource>().pitch = timeFactor;
 	}
 	
 	void Restart ()
