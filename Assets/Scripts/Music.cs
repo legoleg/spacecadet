@@ -4,8 +4,8 @@ using System.Collections;
 [RequireComponent(typeof (AudioSource))]
 public class Music : MonoBehaviour {
 
-	public float pitch;
-	public float volume;
+	public float pitch = 1.0f;
+	public float volume = 0.5f;
 
 	public void FadeIn (float time)
 	{
